@@ -1,195 +1,374 @@
 {
   "metadata": {
-    "atualizado_em": "04/08/2026 08:21:37",
-    "total_registros_filtrados": 20,
-    "aba_origem": "Acompanhamento Google",
-    "filtro": "Google == 'Sim'",
-    "ordenacao": "Faltas (desc), Atrasos (desc)"
+    "atualizado_em": "04/08/2026 08:45:12",
+    "total_registros": 33,
+    "turmas_disponiveis": [
+      "Turma A"
+    ],
+    "regra_aulas": "1 Dia = 10 Aulas",
+    "limite_aulas": 100,
+    "limite_dias": 10
   },
   "kpis": [
     {
-      "titulo": "Alunos 'Google: Sim'",
-      "valor": "20",
-      "subtexto": "Alunos ativos no acompanhamento",
-      "icone": "fa-users-check",
+      "titulo": "Total de Alunos",
+      "valor": "33",
+      "subtexto": "Alunos monitorados",
+      "icone": "fa-users",
       "cor": "emerald"
     },
     {
-      "titulo": "Total de Faltas",
-      "valor": "165",
-      "subtexto": "Média: 8.2 faltas/aluno",
-      "icone": "fa-user-slash",
+      "titulo": "Faltas em Aulas (1 dia = 10 aulas)",
+      "valor": "2170 Aulas",
+      "subtexto": "Total em dias: 217 dias (Média: 65.8 aulas/aluno)",
+      "icone": "fa-book-open-reader",
       "cor": "rose"
     },
     {
       "titulo": "Total de Atrasos",
-      "valor": "17",
+      "valor": "24",
       "subtexto": "Registros de pontualidade",
       "icone": "fa-clock-rotate-left",
       "cor": "amber"
+    },
+    {
+      "titulo": "Limite Máximo de Faltas",
+      "valor": "100 Aulas / 10 Dias",
+      "subtexto": "Teto permitido antes da reprovação",
+      "icone": "fa-shield-cat",
+      "cor": "purple"
     }
   ],
-  "graficos": {
-    "top_faltas_atrasos": {
-      "titulo": "Ranking de Alunos (Faltas x Atrasos)",
-      "labels": [
-        "GIULIA LUZ FARIA DA CRUZ",
-        "ANA CAROLINE CARDOSO DA ROCHA",
-        "PIETRA RIBEIRO TAVEIRA",
-        "MARIANA MOREIRA MOURA",
-        "THALITA OLIVEIRA DO PRADO",
-        "ANA CAROLINA MORAES FERREIRA",
-        "GEOVANA GARCIA SEIXAS",
-        "GUSTAVO SPOSITO",
-        "VINICIUS ALVES ROCHA DOS SANTOS",
-        "ANDRESSA SILVA SANTOS"
-      ],
-      "faltas": [
-        30,
-        20,
-        11,
-        11,
-        11,
-        10,
-        10,
-        10,
-        10,
-        10
-      ],
-      "atrasos": [
-        0,
-        1,
-        1,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        0
-      ]
-    }
-  },
   "registros": [
     {
       "Nome": "GIULIA LUZ FARIA DA CRUZ",
-      "Google": "Sim",
-      "Faltas": 30,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 30,
+      "Faltas_Aulas": 300,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
+    },
+    {
+      "Nome": "JUNIOR GOMES DA SILVA",
+      "Turma": "Turma A",
+      "Faltas_Dias": 30,
+      "Faltas_Aulas": 300,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "ANA CAROLINE CARDOSO DA ROCHA",
-      "Google": "Sim",
-      "Faltas": 20,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 20,
+      "Faltas_Aulas": 200,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "PIETRA RIBEIRO TAVEIRA",
-      "Google": "Sim",
-      "Faltas": 11,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 11,
+      "Faltas_Aulas": 110,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "MARIANA MOREIRA MOURA",
-      "Google": "Sim",
-      "Faltas": 11,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 11,
+      "Faltas_Aulas": 110,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "THALITA OLIVEIRA DO PRADO",
-      "Google": "Sim",
-      "Faltas": 11,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 11,
+      "Faltas_Aulas": 110,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
+    },
+    {
+      "Nome": "SAMUEL RENATO PEREIRA DA SILVA",
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 2,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "ANA CAROLINA MORAES FERREIRA",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "GEOVANA GARCIA SEIXAS",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
+    },
+    {
+      "Nome": "GUILHERME SILVA MARIOTI",
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "GUSTAVO SPOSITO",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "VINICIUS ALVES ROCHA DOS SANTOS",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 1,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "ANDRESSA SILVA SANTOS",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "MARIA EDUARDA DOS SANTOS",
-      "Google": "Sim",
-      "Faltas": 10,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 10,
+      "Faltas_Aulas": 100,
+      "Pct_Limite": 100.0,
+      "Atrasos": 0,
+      "Situacao": "Crítico (Limite Atingido)",
+      "Nivel": "critico"
     },
     {
       "Nome": "SARAH BERTOLINO DOS SANTOS",
-      "Google": "Sim",
-      "Faltas": 5,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 5,
+      "Faltas_Aulas": 50,
+      "Pct_Limite": 50.0,
+      "Atrasos": 1,
+      "Situacao": "Atenção",
+      "Nivel": "atencao"
     },
     {
       "Nome": "JULIANA OLIVEIRA MACHADO",
-      "Google": "Sim",
-      "Faltas": 3,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 3,
+      "Faltas_Aulas": 30,
+      "Pct_Limite": 30.0,
+      "Atrasos": 1,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     },
     {
       "Nome": "BIANCA TELES DA SILVA",
-      "Google": "Sim",
-      "Faltas": 2,
-      "Atrasos": 3
+      "Turma": "Turma A",
+      "Faltas_Dias": 2,
+      "Faltas_Aulas": 20,
+      "Pct_Limite": 20.0,
+      "Atrasos": 3,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "CAIO HENRIQUE BARBOSA DA SILVA",
+      "Turma": "Turma A",
+      "Faltas_Dias": 2,
+      "Faltas_Aulas": 20,
+      "Pct_Limite": 20.0,
+      "Atrasos": 3,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     },
     {
       "Nome": "THAYNA CORREIA DOS SANTOS",
-      "Google": "Sim",
-      "Faltas": 2,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 2,
+      "Faltas_Aulas": 20,
+      "Pct_Limite": 20.0,
+      "Atrasos": 1,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     },
     {
       "Nome": "ERIC RODRIGUES MOTA CORRÊA",
-      "Google": "Sim",
-      "Faltas": 0,
-      "Atrasos": 3
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 3,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LAURA ANGÉLICA MEDEIRO COSTA",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 1,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     },
     {
       "Nome": "LUCAS FRANÇA DA SILVA",
-      "Google": "Sim",
-      "Faltas": 0,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 1,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     },
     {
       "Nome": "MARIA EDUARDA AMARAL SANTOS",
-      "Google": "Sim",
-      "Faltas": 0,
-      "Atrasos": 1
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 1,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     },
     {
       "Nome": "ARTHUR LUCENA ARAUJO",
-      "Google": "Sim",
-      "Faltas": 0,
-      "Atrasos": 0
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "BRUNO ATAIDE LIMA DOURADO",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "BRUNO TAVARES PELLEGRINO",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "EVANDRO JOSE DIAZ VIANA DOS SANTOS",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "FERNANDA MARTINS DA CRUZ",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUSTAVO GABRIEL DOS SANTOS PEDRO",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUSTAVO SANTANA DE OLIVEIRA",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LEONARDO FURLAN SILVA",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LUCCAS GARCIA MELO",
+      "Turma": "Turma A",
+      "Faltas_Dias": 0,
+      "Faltas_Aulas": 0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular",
+      "Nivel": "normal"
     }
   ]
 }

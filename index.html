@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Dashboard Acompanhamento Google - Faltas & Atrasos</title>
+  <title>Dashboard de Acompanhamento de Frequência & Pontualidade</title>
   
   <!-- Google Fonts: Outfit & Inter -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -13,7 +13,7 @@
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <!-- Chart.js -->
+  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   
   <style>
@@ -66,7 +66,7 @@
 
     .header-title h1 {
       font-family: 'Outfit', sans-serif;
-      font-size: 2rem;
+      font-size: 2.1rem;
       font-weight: 800;
       background: linear-gradient(135deg, #a78bfa, #f43f5e);
       -webkit-background-clip: text;
@@ -82,17 +82,66 @@
       margin-top: 0.3rem;
     }
 
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .filter-select {
+      background: rgba(30, 41, 59, 0.9);
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 0.6rem 1rem;
+      border-radius: 0.6rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      transition: border-color 0.2s ease;
+    }
+
+    .filter-select:focus {
+      border-color: var(--accent-purple);
+    }
+
     .badge-status {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-emerald);
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 0.4rem 0.9rem;
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--accent-purple);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      padding: 0.5rem 1rem;
       border-radius: 9999px;
       font-size: 0.85rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+    }
+
+    /* Rule Banner */
+    .rule-banner {
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(244, 63, 94, 0.1));
+      border: 1px solid rgba(139, 92, 246, 0.2);
+      border-radius: 0.85rem;
+      padding: 1rem 1.25rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .rule-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    .rule-item i {
+      color: var(--accent-amber);
     }
 
     /* KPI Grid */
@@ -314,27 +363,32 @@
     .rank-3 { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
     .rank-default { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
 
-    .tag-google {
-      background: rgba(16, 185, 129, 0.15);
-      color: var(--accent-emerald);
-      padding: 0.25rem 0.6rem;
-      border-radius: 0.4rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-
-    .num-faults {
+    .num-faults-days {
       font-family: 'Outfit', sans-serif;
       font-weight: 700;
       font-size: 1.05rem;
       color: var(--accent-rose);
     }
 
-    .num-delays {
-      font-family: 'Outfit', sans-serif;
-      font-weight: 700;
-      font-size: 1.05rem;
-      color: var(--accent-amber);
+    .limit-progress-container {
+      width: 140px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      height: 8px;
+      overflow: hidden;
+      margin-top: 0.3rem;
     }
+
+    .limit-progress-bar {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.4s ease;
+    }
+
+    .bar-critico { background: var(--accent-rose); }
+    .bar-risco { background: var(--accent-amber); }
+    .bar-atencao { background: #eab308; }
+    .bar-normal { background: var(--accent-emerald); }
 
     footer {
       text-align: center;
@@ -351,34 +405,50 @@
     <!-- Header -->
     <header>
       <div class="header-title">
-        <h1><i class="fa-solid fa-graduation-cap"></i> Acompanhamento Google</h1>
-        <p>Painel de Frequência e Pontualidade dos Alunos (Filtro: Google == Sim | Ordenado por Faltas & Atrasos)</p>
+        <h1><i class="fa-solid fa-clipboard-user"></i> Painel de Frequência de Alunos</h1>
+        <p>Acompanhamento de Ausências por Dias e Aulas (1 Dia = 10 Aulas | Limite Máximo = 100 Aulas / 10 Dias)</p>
       </div>
-      <div>
+      <div class="header-actions">
+        <select id="turmaSelect" class="filter-select">
+          <option value="TODAS">📚 Todas as Turmas</option>
+          <option value="Turma A">🏫 Turma A</option>
+        </select>
         <span class="badge-status">
-          <i class="fa-solid fa-circle-check"></i> Dados Sincronizados
+          <i class="fa-solid fa-clock-rotate-left"></i> Atualizado
         </span>
       </div>
     </header>
+
+    <!-- Rule Banner -->
+    <div class="rule-banner">
+      <div class="rule-item">
+        <i class="fa-solid fa-calendar-day"></i>
+        <span><strong>Regra de Faltas:</strong> 1 Dia de ausência equivale a <strong>10 Aulas</strong>.</span>
+      </div>
+      <div class="rule-item">
+        <i class="fa-solid fa-triangle-exclamation"></i>
+        <span><strong>Limite Permitido:</strong> Máximo de <strong>100 Aulas (10 Dias)</strong> antes do limite de reprovação.</span>
+      </div>
+    </div>
 
     <!-- KPI Cards Grid -->
     <div class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Alunos 'Google: Sim'</span>
-          <div class="kpi-icon icon-emerald"><i class="fa-solid fa-user-check"></i></div>
+          <span class="kpi-title">Total de Alunos</span>
+          <div class="kpi-icon icon-emerald"><i class="fa-solid fa-users"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-alunos">20</div>
-        <div class="kpi-subtext">Alunos selecionados e ordenados</div>
+        <div class="kpi-value" id="kpi-total-alunos">33</div>
+        <div class="kpi-subtext" id="kpi-sub-turma">Alunos na turma selecionada</div>
       </div>
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Total de Faltas</span>
-          <div class="kpi-icon icon-rose"><i class="fa-solid fa-user-xmark"></i></div>
+          <span class="kpi-title">Total Faltas (Aulas)</span>
+          <div class="kpi-icon icon-rose"><i class="fa-solid fa-book-open-reader"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-faltas" style="color: var(--accent-rose);">170</div>
-        <div class="kpi-subtext" id="kpi-sub-faltas">Média: 8.5 faltas/aluno</div>
+        <div class="kpi-value" id="kpi-total-aulas-faltas" style="color: var(--accent-rose);">2170 Aulas</div>
+        <div class="kpi-subtext" id="kpi-sub-dias-faltas">Equivalente a 217 dias de faltas</div>
       </div>
 
       <div class="kpi-card">
@@ -386,16 +456,16 @@
           <span class="kpi-title">Total de Atrasos</span>
           <div class="kpi-icon icon-amber"><i class="fa-solid fa-clock"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-atrasos" style="color: var(--accent-amber);">17</div>
-        <div class="kpi-subtext" id="kpi-sub-atrasos">Pontualidade monitorada</div>
+        <div class="kpi-value" id="kpi-total-atrasos" style="color: var(--accent-amber);">24</div>
+        <div class="kpi-subtext">Registros de pontualidade</div>
       </div>
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Maior Número de Faltas</span>
-          <div class="kpi-icon icon-purple"><i class="fa-solid fa-triangle-exclamation"></i></div>
+          <span class="kpi-title">Maior Frequência de Faltas</span>
+          <div class="kpi-icon icon-purple"><i class="fa-solid fa-user-ninja"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-top-aluno-faltas" style="font-size: 1.5rem; color: var(--accent-purple);">30 Faltas</div>
+        <div class="kpi-value" id="kpi-top-aluno-faltas" style="font-size: 1.4rem; color: var(--accent-purple);">300 Aulas (30 Dias)</div>
         <div class="kpi-subtext" id="kpi-top-aluno-nome">GIULIA LUZ FARIA DA CRUZ</div>
       </div>
     </div>
@@ -404,7 +474,7 @@
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-header">
-          <span class="chart-title"><i class="fa-solid fa-chart-simple" style="color: var(--accent-purple);"></i> Top Alunos por Faltas e Atrasos</span>
+          <span class="chart-title"><i class="fa-solid fa-chart-column" style="color: var(--accent-purple);"></i> Alunos com Mais Aulas Faltadas (Comparativo por Aulas & Dias)</span>
         </div>
         <div class="canvas-container">
           <canvas id="chartRanking"></canvas>
@@ -413,7 +483,7 @@
 
       <div class="chart-card">
         <div class="chart-header">
-          <span class="chart-title"><i class="fa-solid fa-chart-pie" style="color: var(--accent-rose);"></i> Proporção Faltas x Atrasos</span>
+          <span class="chart-title"><i class="fa-solid fa-pie-chart" style="color: var(--accent-rose);"></i> Distribuição de Aulas Faltadas vs. Atrasos</span>
         </div>
         <div class="canvas-container">
           <canvas id="chartDoughnut"></canvas>
@@ -424,10 +494,10 @@
     <!-- Table Section -->
     <div class="table-card">
       <div class="table-controls">
-        <div class="chart-title"><i class="fa-solid fa-list-ol" style="color: var(--accent-emerald);"></i> Ranking Geral dos Alunos (Google == Sim)</div>
+        <div class="chart-title"><i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> Tabela de Frequência e Progresso do Limite (100 Aulas)</div>
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar por nome do aluno...">
+          <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar aluno por nome...">
         </div>
         <button class="btn-export" id="btnExportCSV"><i class="fa-solid fa-file-csv"></i> Exportar CSV</button>
       </div>
@@ -438,10 +508,12 @@
             <tr>
               <th># Posição</th>
               <th>Nome do Aluno</th>
-              <th>Status Google</th>
-              <th>Faltas</th>
+              <th>Turma</th>
+              <th>Dias de Falta</th>
+              <th>Aulas Faltadas (1 dia = 10 aulas)</th>
+              <th>Progresso no Limite (100 Aulas / 10 Dias)</th>
               <th>Atrasos</th>
-              <th>Situação / Alerta</th>
+              <th>Situação</th>
             </tr>
           </thead>
           <tbody id="tableBody">
@@ -453,45 +525,46 @@
 
     <!-- Footer -->
     <footer>
-      <p>Dashboard de Acompanhamento Google • Gerado Automaticamente para GitHub Pages • Atualizado em <span id="lastUpdated">-</span></p>
+      <p>Dashboard de Acompanhamento de Frequência de Alunos • Atualizado em <span id="lastUpdated">-</span></p>
     </footer>
   </div>
 
   <script>
-    // Dados com fallback embutido
+    // Fallback completo de dados
     let rawData = {
-      "metadata": { "atualizado_em": new Date().toLocaleString('pt-BR'), "total_registros_filtrados": 20 },
-      "kpis": [
-        { "titulo": "Alunos 'Google: Sim'", "valor": "20" },
-        { "titulo": "Total de Faltas", "valor": "170" },
-        { "titulo": "Total de Atrasos", "valor": "17" }
-      ],
+      "metadata": { "atualizado_em": new Date().toLocaleString('pt-BR'), "turmas_disponiveis": ["Turma A"] },
       "registros": [
-        { "Nome": "GIULIA LUZ FARIA DA CRUZ", "Google": "Sim", "Faltas": 30, "Atrasos": 0 },
-        { "Nome": "ANA CAROLINE CARDOSO DA ROCHA", "Google": "Sim", "Faltas": 20, "Atrasos": 1 },
-        { "Nome": "MARIANA MOREIRA MOURA", "Google": "Sim", "Faltas": 11, "Atrasos": 0 },
-        { "Nome": "THALITA OLIVEIRA DO PRADO", "Google": "Sim", "Faltas": 11, "Atrasos": 0 },
-        { "Nome": "PIETRA RIBEIRO TAVEIRA", "Google": "Sim", "Faltas": 11, "Atrasos": 1 },
-        { "Nome": "ANA CAROLINA MORAES FERREIRA", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
-        { "Nome": "GEOVANA GARCIA SEIXAS", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
-        { "Nome": "GUSTAVO SPOSITO", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
-        { "Nome": "VINICIUS ALVES ROCHA DOS SANTOS", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
-        { "Nome": "ANDRESSA SILVA SANTOS", "Google": "Sim", "Faltas": 10, "Atrasos": 0 },
-        { "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA", "Google": "Sim", "Faltas": 10, "Atrasos": 0 },
-        { "Nome": "MARIA EDUARDA DOS SANTOS", "Google": "Sim", "Faltas": 10, "Atrasos": 0 },
-        { "Nome": "SARAH BERTOLINO DOS SANTOS", "Google": "Sim", "Faltas": 5, "Atrasos": 1 },
-        { "Nome": "JULIANA OLIVEIRA MACHADO", "Google": "Sim", "Faltas": 3, "Atrasos": 1 },
-        { "Nome": "BIANCA TELES DA SILVA", "Google": "Sim", "Faltas": 2, "Atrasos": 3 },
-        { "Nome": "THAYNA CORREIA DOS SANTOS", "Google": "Sim", "Faltas": 2, "Atrasos": 1 },
-        { "Nome": "ERIC RODRIGUES MOTA CORRÊA", "Google": "Sim", "Faltas": 0, "Atrasos": 3 },
-        { "Nome": "LUCAS FRANÇA DA SILVA", "Google": "Sim", "Faltas": 0, "Atrasos": 1 },
-        { "Nome": "MARIA EDUARDA AMARAL SANTOS", "Google": "Sim", "Faltas": 0, "Atrasos": 1 },
-        { "Nome": "ARTHUR LUCENA ARAUJO", "Google": "Sim", "Faltas": 0, "Atrasos": 0 }
+        { "Nome": "GIULIA LUZ FARIA DA CRUZ", "Turma": "Turma A", "Faltas_Dias": 30, "Faltas_Aulas": 300, "Atrasos": 0 },
+        { "Nome": "JUNIOR GOMES DA SILVA", "Turma": "Turma A", "Faltas_Dias": 30, "Faltas_Aulas": 300, "Atrasos": 0 },
+        { "Nome": "ANA CAROLINE CARDOSO DA ROCHA", "Turma": "Turma A", "Faltas_Dias": 20, "Faltas_Aulas": 200, "Atrasos": 1 },
+        { "Nome": "MARIANA MOREIRA MOURA", "Turma": "Turma A", "Faltas_Dias": 11, "Faltas_Aulas": 110, "Atrasos": 0 },
+        { "Nome": "THALITA OLIVEIRA DO PRADO", "Turma": "Turma A", "Faltas_Dias": 11, "Faltas_Aulas": 110, "Atrasos": 0 },
+        { "Nome": "PIETRA RIBEIRO TAVEIRA", "Turma": "Turma A", "Faltas_Dias": 11, "Faltas_Aulas": 110, "Atrasos": 1 },
+        { "Nome": "ANA CAROLINA MORAES FERREIRA", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
+        { "Nome": "GEOVANA GARCIA SEIXAS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
+        { "Nome": "GUSTAVO SPOSITO", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
+        { "Nome": "VINICIUS ALVES ROCHA DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
+        { "Nome": "ANDRESSA SILVA SANTOS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 0 },
+        { "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 0 },
+        { "Nome": "MARIA EDUARDA DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 0 },
+        { "Nome": "GUILHERME SILVA MARIOTI", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
+        { "Nome": "SAMUEL RENATO PEREIRA DA SILVA", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 2 },
+        { "Nome": "SARAH BERTOLINO DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 5, "Faltas_Aulas": 50, "Atrasos": 1 },
+        { "Nome": "JULIANA OLIVEIRA MACHADO", "Turma": "Turma A", "Faltas_Dias": 3, "Faltas_Aulas": 30, "Atrasos": 1 },
+        { "Nome": "BIANCA TELES DA SILVA", "Turma": "Turma A", "Faltas_Dias": 2, "Faltas_Aulas": 20, "Atrasos": 3 },
+        { "Nome": "CAIO HENRIQUE BARBOSA DA SILVA", "Turma": "Turma A", "Faltas_Dias": 2, "Faltas_Aulas": 20, "Atrasos": 3 },
+        { "Nome": "THAYNA CORREIA DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 2, "Faltas_Aulas": 20, "Atrasos": 1 },
+        { "Nome": "ERIC RODRIGUES MOTA CORRÊA", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 3 },
+        { "Nome": "LUCAS FRANÇA DA SILVA", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 1 },
+        { "Nome": "MARIA EDUARDA AMARAL SANTOS", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 1 },
+        { "Nome": "LAURA ANGÉLICA MEDEIRO COSTA", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 1 },
+        { "Nome": "ARTHUR LUCENA ARAUJO", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 0 }
       ]
     };
 
     let chartRankingInstance = null;
     let chartDoughnutInstance = null;
+    let registrosFiltradosAtuais = [];
 
     async function carregarDados() {
       try {
@@ -503,77 +576,130 @@
           }
         }
       } catch (e) {
-        console.log("Usando dados embutidos de fallback.");
+        console.log("Usando dados de fallback.");
       }
-      renderizarDashboard(rawData.registros);
+
+      popularDropdownTurmas();
+      aplicarFiltrosEAtualizar();
+    }
+
+    function popularDropdownTurmas() {
+      const select = document.getElementById('turmaSelect');
+      const turmas = rawData.metadata?.turmas_disponiveis || ["Turma A"];
+      select.innerHTML = '<option value="TODAS">📚 Todas as Turmas</option>';
+      
+      turmas.forEach(t => {
+        const opt = document.createElement('option');
+        opt.value = t;
+        opt.textContent = `🏫 ${t}`;
+        select.appendChild(opt);
+      });
+    }
+
+    function aplicarFiltrosEAtualizar() {
+      const turmaSel = document.getElementById('turmaSelect').value;
+      const busca = document.getElementById('searchInput').value.toLowerCase().trim();
+
+      let lista = rawData.registros || [];
+
+      if (turmaSel !== 'TODAS') {
+        lista = lista.filter(r => r.Turma === turmaSel);
+      }
+
+      if (busca) {
+        lista = lista.filter(r => r.Nome.toLowerCase().includes(busca));
+      }
+
+      lista.sort((a, b) => (b.Faltas_Dias - a.Faltas_Dias) || (b.Atrasos - a.Atrasos));
+
+      registrosFiltradosAtuais = lista;
+      renderizarDashboard(lista);
     }
 
     function renderizarDashboard(registros) {
-      // Ordenação estrita: Faltas desc, Atrasos desc
-      registros.sort((a, b) => (b.Faltas - a.Faltas) || (b.Atrasos - a.Atrasos));
-
-      // Atualiza KPIs
       const totalAlunos = registros.length;
-      const totalFaltas = registros.reduce((acc, r) => acc + (Number(r.Faltas) || 0), 0);
-      const totalAtrasos = registros.reduce((acc, r) => acc + (Number(r.Atrasos) || 0), 0);
-      const mediaFaltas = (totalFaltas / (totalAlunos || 1)).toFixed(1);
+      const totalDiasFaltas = registros.reduce((acc, r) => acc + (r.Faltas_Dias || 0), 0);
+      const totalAulasFaltas = registros.reduce((acc, r) => acc + (r.Faltas_Aulas || 0), 0);
+      const totalAtrasos = registros.reduce((acc, r) => acc + (r.Atrasos || 0), 0);
+      const mediaAulas = (totalAulasFaltas / (totalAlunos || 1)).toFixed(1);
 
       document.getElementById('kpi-total-alunos').textContent = totalAlunos;
-      document.getElementById('kpi-total-faltas').textContent = totalFaltas;
-      document.getElementById('kpi-sub-faltas').textContent = `Média: ${mediaFaltas} faltas/aluno`;
+      document.getElementById('kpi-total-aulas-faltas').textContent = `${totalAulasFaltas} Aulas`;
+      document.getElementById('kpi-sub-dias-faltas').textContent = `Equivalente a ${totalDiasFaltas} dias (Média: ${mediaAulas} aulas/aluno)`;
       document.getElementById('kpi-total-atrasos').textContent = totalAtrasos;
 
       if (registros.length > 0) {
-        document.getElementById('kpi-top-aluno-faltas').textContent = `${registros[0].Faltas} Faltas`;
+        document.getElementById('kpi-top-aluno-faltas').textContent = `${registros[0].Faltas_Aulas} Aulas (${registros[0].Faltas_Dias} Dias)`;
         document.getElementById('kpi-top-aluno-nome').textContent = registros[0].Nome;
+      } else {
+        document.getElementById('kpi-top-aluno-faltas').textContent = '-';
+        document.getElementById('kpi-top-aluno-nome').textContent = '-';
       }
 
       document.getElementById('lastUpdated').textContent = rawData.metadata?.atualizado_em || new Date().toLocaleString('pt-BR');
 
-      // Tabela
       renderizarTabela(registros);
-
-      // Gráficos
-      renderizarGraficos(registros, totalFaltas, totalAtrasos);
+      renderizarGraficos(registros, totalAulasFaltas, totalAtrasos);
     }
 
     function renderizarTabela(registros) {
       const tbody = document.getElementById('tableBody');
       tbody.innerHTML = '';
 
+      if (registros.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--text-muted);">Nenhum aluno encontrado.</td></tr>';
+        return;
+      }
+
       registros.forEach((r, idx) => {
         const tr = document.createElement('tr');
         const pos = idx + 1;
-        
+
         let rankClass = 'rank-default';
         if (pos === 1) rankClass = 'rank-1';
         else if (pos === 2) rankClass = 'rank-2';
         else if (pos === 3) rankClass = 'rank-3';
 
-        let situacaoBadge = '<span style="color: #10b981; font-weight:600;"><i class="fa-solid fa-check"></i> Normal</span>';
-        if (r.Faltas >= 15) {
-          situacaoBadge = '<span style="color: #f43f5e; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Crítico</span>';
-        } else if (r.Faltas >= 10) {
-          situacaoBadge = '<span style="color: #f59e0b; font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> Atenção</span>';
+        const pct = Math.min(100, Math.round((r.Faltas_Aulas / 100) * 100));
+
+        let barClass = 'bar-normal';
+        let situacaoBadge = '<span style="color:#10b981; font-weight:600;"><i class="fa-solid fa-circle-check"></i> Regular</span>';
+
+        if (r.Faltas_Aulas >= 100) {
+          barClass = 'bar-critico';
+          situacaoBadge = '<span style="color:#f43f5e; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Limite Atingido</span>';
+        } else if (r.Faltas_Aulas >= 70) {
+          barClass = 'bar-risco';
+          situacaoBadge = '<span style="color:#f59e0b; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Risco Alto</span>';
+        } else if (r.Faltas_Aulas >= 40) {
+          barClass = 'bar-atencao';
+          situacaoBadge = '<span style="color:#eab308; font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> Atenção</span>';
         }
 
         tr.innerHTML = `
           <td><span class="rank-badge ${rankClass}">${pos}</span></td>
           <td style="font-weight: 600;">${r.Nome}</td>
-          <td><span class="tag-google"><i class="fa-brands fa-google"></i> ${r.Google}</span></td>
-          <td class="num-faults">${r.Faltas}</td>
-          <td class="num-delays">${r.Atrasos}</td>
+          <td><span style="background:rgba(255,255,255,0.06); padding:0.25rem 0.6rem; border-radius:0.4rem; font-size:0.8rem;">${r.Turma}</span></td>
+          <td class="num-faults-days">${r.Faltas_Dias} Dias</td>
+          <td style="font-weight: 700; color: #a78bfa;">${r.Faltas_Aulas} Aulas</td>
+          <td>
+            <div style="font-size:0.78rem; font-weight:600; margin-bottom:0.2rem; color:var(--text-muted);">${pct}% do limite (100 Aulas)</div>
+            <div class="limit-progress-container">
+              <div class="limit-progress-bar ${barClass}" style="width: ${pct}%;"></div>
+            </div>
+          </td>
+          <td style="font-weight: 700; color: var(--accent-amber);">${r.Atrasos}</td>
           <td>${situacaoBadge}</td>
         `;
         tbody.appendChild(tr);
       });
     }
 
-    function renderizarGraficos(registros, totalFaltas, totalAtrasos) {
-      const top10 = registros.slice(0, 8);
-      const labels = top10.map(r => r.Nome.length > 18 ? r.Nome.substring(0, 18) + '...' : r.Nome);
-      const faltas = top10.map(r => r.Faltas);
-      const atrasos = top10.map(r => r.Atrasos);
+    function renderizarGraficos(registros, totalAulasFaltas, totalAtrasos) {
+      const top8 = registros.slice(0, 8);
+      const labels = top8.map(r => r.Nome.length > 18 ? r.Nome.substring(0, 18) + '...' : r.Nome);
+      const aulas = top8.map(r => r.Faltas_Aulas);
+      const dias = top8.map(r => r.Faltas_Dias);
 
       if (chartRankingInstance) chartRankingInstance.destroy();
       if (chartDoughnutInstance) chartDoughnutInstance.destroy();
@@ -585,15 +711,15 @@
           labels: labels,
           datasets: [
             {
-              label: 'Faltas',
-              data: faltas,
-              backgroundColor: 'rgba(244, 63, 94, 0.85)',
+              label: 'Aulas Faltadas (1 dia = 10 aulas)',
+              data: aulas,
+              backgroundColor: 'rgba(167, 139, 250, 0.85)',
               borderRadius: 6
             },
             {
-              label: 'Atrasos',
-              data: atrasos,
-              backgroundColor: 'rgba(245, 158, 11, 0.85)',
+              label: 'Dias de Ausência',
+              data: dias,
+              backgroundColor: 'rgba(244, 63, 94, 0.85)',
               borderRadius: 6
             }
           ]
@@ -615,10 +741,10 @@
       chartDoughnutInstance = new Chart(ctxDoughnut, {
         type: 'doughnut',
         data: {
-          labels: ['Faltas', 'Atrasos'],
+          labels: ['Aulas Faltadas', 'Atrasos'],
           datasets: [{
-            data: [totalFaltas, totalAtrasos],
-            backgroundColor: ['rgba(244, 63, 94, 0.85)', 'rgba(245, 158, 11, 0.85)'],
+            data: [totalAulasFaltas, totalAtrasos],
+            backgroundColor: ['rgba(167, 139, 250, 0.85)', 'rgba(245, 158, 11, 0.85)'],
             borderWidth: 0
           }]
         },
@@ -632,24 +758,19 @@
       });
     }
 
-    // Busca ao digitar
-    document.getElementById('searchInput').addEventListener('input', function(e) {
-      const term = e.target.value.toLowerCase().trim();
-      const filtrados = rawData.registros.filter(r => r.Nome.toLowerCase().includes(term));
-      renderizarTabela(filtrados);
-    });
+    document.getElementById('turmaSelect').addEventListener('change', aplicarFiltrosEAtualizar);
+    document.getElementById('searchInput').addEventListener('input', aplicarFiltrosEAtualizar);
 
-    // Exportação CSV
     document.getElementById('btnExportCSV').addEventListener('click', function() {
-      let csv = 'Posição,Nome,Google,Faltas,Atrasos\n';
-      rawData.registros.forEach((r, idx) => {
-        csv += `${idx + 1},"${r.Nome}",${r.Google},${r.Faltas},${r.Atrasos}\n`;
+      let csv = 'Posição,Nome,Turma,Faltas_Dias,Faltas_Aulas,Atrasos,Situação\n';
+      registrosFiltradosAtuais.forEach((r, idx) => {
+        csv += `${idx + 1},"${r.Nome}","${r.Turma}",${r.Faltas_Dias},${r.Faltas_Aulas},${r.Atrasos},"${r.Situacao}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `Acompanhamento_Google_${new Date().toISOString().slice(0,10)}.csv`;
+      a.download = `Acompanhamento_Frequencia_${new Date().toISOString().slice(0,10)}.csv`;
       a.click();
     });
 
