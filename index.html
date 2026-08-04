@@ -411,7 +411,8 @@
       <div class="header-actions">
         <select id="turmaSelect" class="filter-select">
           <option value="TODAS">📚 Todas as Turmas</option>
-          <option value="Turma A">🏫 Turma A</option>
+          <option value="1° Semestre">🏫 1° Semestre</option>
+          <option value="3° Semestre">🏫 3° Semestre</option>
         </select>
         <span class="badge-status">
           <i class="fa-solid fa-clock-rotate-left"></i> Atualizado
@@ -426,8 +427,8 @@
         <span><strong>Regra de Faltas:</strong> 1 Dia de ausência equivale a <strong>10 Aulas</strong>.</span>
       </div>
       <div class="rule-item">
-        <i class="fa-solid fa-triangle-exclamation"></i>
-        <span><strong>Limite Permitido:</strong> Máximo de <strong>100 Aulas (10 Dias)</strong> antes do limite de reprovação.</span>
+        <i class="fa-solid fa-shield-halved"></i>
+        <span><strong>Limite Máximo:</strong> Limite de <strong>100 Aulas (10 Dias)</strong> antes da reprovação.</span>
       </div>
     </div>
 
@@ -447,8 +448,8 @@
           <span class="kpi-title">Total Faltas (Aulas)</span>
           <div class="kpi-icon icon-rose"><i class="fa-solid fa-book-open-reader"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-aulas-faltas" style="color: var(--accent-rose);">2170 Aulas</div>
-        <div class="kpi-subtext" id="kpi-sub-dias-faltas">Equivalente a 217 dias de faltas</div>
+        <div class="kpi-value" id="kpi-total-aulas-faltas" style="color: var(--accent-rose);">217 Aulas</div>
+        <div class="kpi-subtext" id="kpi-sub-dias-faltas">Equivalente a 21.7 dias de faltas</div>
       </div>
 
       <div class="kpi-card">
@@ -465,7 +466,7 @@
           <span class="kpi-title">Maior Frequência de Faltas</span>
           <div class="kpi-icon icon-purple"><i class="fa-solid fa-user-ninja"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-top-aluno-faltas" style="font-size: 1.4rem; color: var(--accent-purple);">300 Aulas (30 Dias)</div>
+        <div class="kpi-value" id="kpi-top-aluno-faltas" style="font-size: 1.4rem; color: var(--accent-purple);">30 Aulas (3.0 Dias)</div>
         <div class="kpi-subtext" id="kpi-top-aluno-nome">GIULIA LUZ FARIA DA CRUZ</div>
       </div>
     </div>
@@ -509,8 +510,8 @@
               <th># Posição</th>
               <th>Nome do Aluno</th>
               <th>Turma</th>
-              <th>Dias de Falta</th>
-              <th>Aulas Faltadas (1 dia = 10 aulas)</th>
+              <th>Faltas (Aulas)</th>
+              <th>Equivalente (Dias)</th>
               <th>Progresso no Limite (100 Aulas / 10 Dias)</th>
               <th>Atrasos</th>
               <th>Situação</th>
@@ -530,35 +531,31 @@
   </div>
 
   <script>
-    // Fallback completo de dados
+    // Fallback completo de dados corrigidos (30 AULAS = 3.0 DIAS = 30% DO LIMITE)
     let rawData = {
-      "metadata": { "atualizado_em": new Date().toLocaleString('pt-BR'), "turmas_disponiveis": ["Turma A"] },
+      "metadata": { "atualizado_em": new Date().toLocaleString('pt-BR'), "turmas_disponiveis": ["1° Semestre", "3° Semestre"] },
       "registros": [
-        { "Nome": "GIULIA LUZ FARIA DA CRUZ", "Turma": "Turma A", "Faltas_Dias": 30, "Faltas_Aulas": 300, "Atrasos": 0 },
-        { "Nome": "JUNIOR GOMES DA SILVA", "Turma": "Turma A", "Faltas_Dias": 30, "Faltas_Aulas": 300, "Atrasos": 0 },
-        { "Nome": "ANA CAROLINE CARDOSO DA ROCHA", "Turma": "Turma A", "Faltas_Dias": 20, "Faltas_Aulas": 200, "Atrasos": 1 },
-        { "Nome": "MARIANA MOREIRA MOURA", "Turma": "Turma A", "Faltas_Dias": 11, "Faltas_Aulas": 110, "Atrasos": 0 },
-        { "Nome": "THALITA OLIVEIRA DO PRADO", "Turma": "Turma A", "Faltas_Dias": 11, "Faltas_Aulas": 110, "Atrasos": 0 },
-        { "Nome": "PIETRA RIBEIRO TAVEIRA", "Turma": "Turma A", "Faltas_Dias": 11, "Faltas_Aulas": 110, "Atrasos": 1 },
-        { "Nome": "ANA CAROLINA MORAES FERREIRA", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
-        { "Nome": "GEOVANA GARCIA SEIXAS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
-        { "Nome": "GUSTAVO SPOSITO", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
-        { "Nome": "VINICIUS ALVES ROCHA DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
-        { "Nome": "ANDRESSA SILVA SANTOS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 0 },
-        { "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 0 },
-        { "Nome": "MARIA EDUARDA DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 0 },
-        { "Nome": "GUILHERME SILVA MARIOTI", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 1 },
-        { "Nome": "SAMUEL RENATO PEREIRA DA SILVA", "Turma": "Turma A", "Faltas_Dias": 10, "Faltas_Aulas": 100, "Atrasos": 2 },
-        { "Nome": "SARAH BERTOLINO DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 5, "Faltas_Aulas": 50, "Atrasos": 1 },
-        { "Nome": "JULIANA OLIVEIRA MACHADO", "Turma": "Turma A", "Faltas_Dias": 3, "Faltas_Aulas": 30, "Atrasos": 1 },
-        { "Nome": "BIANCA TELES DA SILVA", "Turma": "Turma A", "Faltas_Dias": 2, "Faltas_Aulas": 20, "Atrasos": 3 },
-        { "Nome": "CAIO HENRIQUE BARBOSA DA SILVA", "Turma": "Turma A", "Faltas_Dias": 2, "Faltas_Aulas": 20, "Atrasos": 3 },
-        { "Nome": "THAYNA CORREIA DOS SANTOS", "Turma": "Turma A", "Faltas_Dias": 2, "Faltas_Aulas": 20, "Atrasos": 1 },
-        { "Nome": "ERIC RODRIGUES MOTA CORRÊA", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 3 },
-        { "Nome": "LUCAS FRANÇA DA SILVA", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 1 },
-        { "Nome": "MARIA EDUARDA AMARAL SANTOS", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 1 },
-        { "Nome": "LAURA ANGÉLICA MEDEIRO COSTA", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 1 },
-        { "Nome": "ARTHUR LUCENA ARAUJO", "Turma": "Turma A", "Faltas_Dias": 0, "Faltas_Aulas": 0, "Atrasos": 0 }
+        { "Nome": "GIULIA LUZ FARIA DA CRUZ", "Turma": "1° Semestre", "Faltas_Aulas": 30, "Faltas_Dias": 3.0, "Pct_Limite": 30.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "JUNIOR GOMES DA SILVA", "Turma": "1° Semestre", "Faltas_Aulas": 30, "Faltas_Dias": 3.0, "Pct_Limite": 30.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "ANA CAROLINE CARDOSO DA ROCHA", "Turma": "1° Semestre", "Faltas_Aulas": 20, "Faltas_Dias": 2.0, "Pct_Limite": 20.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "MARIANA MOREIRA MOURA", "Turma": "1° Semestre", "Faltas_Aulas": 11, "Faltas_Dias": 1.1, "Pct_Limite": 11.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "THALITA OLIVEIRA DO PRADO", "Turma": "1° Semestre", "Faltas_Aulas": 11, "Faltas_Dias": 1.1, "Pct_Limite": 11.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "PIETRA RIBEIRO TAVEIRA", "Turma": "1° Semestre", "Faltas_Aulas": 11, "Faltas_Dias": 1.1, "Pct_Limite": 11.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "ANA CAROLINA MORAES FERREIRA", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "GEOVANA GARCIA SEIXAS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "GUSTAVO SPOSITO", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "VINICIUS ALVES ROCHA DOS SANTOS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "ANDRESSA SILVA SANTOS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "MARIA EDUARDA DOS SANTOS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Pct_Limite": 10.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "SARAH BERTOLINO DOS SANTOS", "Turma": "3° Semestre", "Faltas_Aulas": 5, "Faltas_Dias": 0.5, "Pct_Limite": 5.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "JULIANA OLIVEIRA MACHADO", "Turma": "3° Semestre", "Faltas_Aulas": 3, "Faltas_Dias": 0.3, "Pct_Limite": 3.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "BIANCA TELES DA SILVA", "Turma": "3° Semestre", "Faltas_Aulas": 2, "Faltas_Dias": 0.2, "Pct_Limite": 2.0, "Atrasos": 3, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "THAYNA CORREIA DOS SANTOS", "Turma": "3° Semestre", "Faltas_Aulas": 2, "Faltas_Dias": 0.2, "Pct_Limite": 2.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "ERIC RODRIGUES MOTA CORRÊA", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Pct_Limite": 0.0, "Atrasos": 3, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "LUCAS FRANÇA DA SILVA", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Pct_Limite": 0.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "MARIA EDUARDA AMARAL SANTOS", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Pct_Limite": 0.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
+        { "Nome": "ARTHUR LUCENA ARAUJO", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Pct_Limite": 0.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" }
       ]
     };
 
@@ -576,7 +573,7 @@
           }
         }
       } catch (e) {
-        console.log("Usando dados de fallback.");
+        console.log("Carregando fallback de dados.");
       }
 
       popularDropdownTurmas();
@@ -585,7 +582,7 @@
 
     function popularDropdownTurmas() {
       const select = document.getElementById('turmaSelect');
-      const turmas = rawData.metadata?.turmas_disponiveis || ["Turma A"];
+      const turmas = rawData.metadata?.turmas_disponiveis || ["1° Semestre", "3° Semestre"];
       select.innerHTML = '<option value="TODAS">📚 Todas as Turmas</option>';
       
       turmas.forEach(t => {
@@ -610,7 +607,7 @@
         lista = lista.filter(r => r.Nome.toLowerCase().includes(busca));
       }
 
-      lista.sort((a, b) => (b.Faltas_Dias - a.Faltas_Dias) || (b.Atrasos - a.Atrasos));
+      lista.sort((a, b) => (b.Faltas_Aulas - a.Faltas_Aulas) || (b.Atrasos - a.Atrasos));
 
       registrosFiltradosAtuais = lista;
       renderizarDashboard(lista);
@@ -618,8 +615,8 @@
 
     function renderizarDashboard(registros) {
       const totalAlunos = registros.length;
-      const totalDiasFaltas = registros.reduce((acc, r) => acc + (r.Faltas_Dias || 0), 0);
       const totalAulasFaltas = registros.reduce((acc, r) => acc + (r.Faltas_Aulas || 0), 0);
+      const totalDiasFaltas = (totalAulasFaltas / 10).toFixed(1);
       const totalAtrasos = registros.reduce((acc, r) => acc + (r.Atrasos || 0), 0);
       const mediaAulas = (totalAulasFaltas / (totalAlunos || 1)).toFixed(1);
 
@@ -680,8 +677,8 @@
           <td><span class="rank-badge ${rankClass}">${pos}</span></td>
           <td style="font-weight: 600;">${r.Nome}</td>
           <td><span style="background:rgba(255,255,255,0.06); padding:0.25rem 0.6rem; border-radius:0.4rem; font-size:0.8rem;">${r.Turma}</span></td>
-          <td class="num-faults-days">${r.Faltas_Dias} Dias</td>
           <td style="font-weight: 700; color: #a78bfa;">${r.Faltas_Aulas} Aulas</td>
+          <td class="num-faults-days">${r.Faltas_Dias} Dias</td>
           <td>
             <div style="font-size:0.78rem; font-weight:600; margin-bottom:0.2rem; color:var(--text-muted);">${pct}% do limite (100 Aulas)</div>
             <div class="limit-progress-container">
@@ -711,13 +708,13 @@
           labels: labels,
           datasets: [
             {
-              label: 'Aulas Faltadas (1 dia = 10 aulas)',
+              label: 'Aulas Faltadas (Faltas)',
               data: aulas,
               backgroundColor: 'rgba(167, 139, 250, 0.85)',
               borderRadius: 6
             },
             {
-              label: 'Dias de Ausência',
+              label: 'Dias de Ausência (Aulas / 10)',
               data: dias,
               backgroundColor: 'rgba(244, 63, 94, 0.85)',
               borderRadius: 6
@@ -762,9 +759,9 @@
     document.getElementById('searchInput').addEventListener('input', aplicarFiltrosEAtualizar);
 
     document.getElementById('btnExportCSV').addEventListener('click', function() {
-      let csv = 'Posição,Nome,Turma,Faltas_Dias,Faltas_Aulas,Atrasos,Situação\n';
+      let csv = 'Posição,Nome,Turma,Faltas_Aulas,Faltas_Dias,Atrasos,Situação\n';
       registrosFiltradosAtuais.forEach((r, idx) => {
-        csv += `${idx + 1},"${r.Nome}","${r.Turma}",${r.Faltas_Dias},${r.Faltas_Aulas},${r.Atrasos},"${r.Situacao}"\n`;
+        csv += `${idx + 1},"${r.Nome}","${r.Turma}",${r.Faltas_Aulas},${r.Faltas_Dias},${r.Atrasos},"${r.Situacao}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
