@@ -1,0 +1,30 @@
+# Credentials & Secrets (CRITICAL - DO NOT LEAK)
+credentials.json
+service_account.json
+token.json
+*.pem
+*.key
+.env
+
+# Browser Profiles & Session Logs (CRITICAL - DO NOT LEAK)
+browser_profile/
+browser_profile*
+*.log
+
+# Raw SharePoint Excel Downloads
+temp_excel_baixado.xlsx
+*.xlsx
+*.xls
+
+# Python Cache & Virtual Environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+
+# OS Specific
+.DS_Store
+Thumbs.db
