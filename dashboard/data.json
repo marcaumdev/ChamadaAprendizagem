@@ -1,0 +1,195 @@
+{
+  "metadata": {
+    "atualizado_em": "04/08/2026 08:21:37",
+    "total_registros_filtrados": 20,
+    "aba_origem": "Acompanhamento Google",
+    "filtro": "Google == 'Sim'",
+    "ordenacao": "Faltas (desc), Atrasos (desc)"
+  },
+  "kpis": [
+    {
+      "titulo": "Alunos 'Google: Sim'",
+      "valor": "20",
+      "subtexto": "Alunos ativos no acompanhamento",
+      "icone": "fa-users-check",
+      "cor": "emerald"
+    },
+    {
+      "titulo": "Total de Faltas",
+      "valor": "165",
+      "subtexto": "Média: 8.2 faltas/aluno",
+      "icone": "fa-user-slash",
+      "cor": "rose"
+    },
+    {
+      "titulo": "Total de Atrasos",
+      "valor": "17",
+      "subtexto": "Registros de pontualidade",
+      "icone": "fa-clock-rotate-left",
+      "cor": "amber"
+    }
+  ],
+  "graficos": {
+    "top_faltas_atrasos": {
+      "titulo": "Ranking de Alunos (Faltas x Atrasos)",
+      "labels": [
+        "GIULIA LUZ FARIA DA CRUZ",
+        "ANA CAROLINE CARDOSO DA ROCHA",
+        "PIETRA RIBEIRO TAVEIRA",
+        "MARIANA MOREIRA MOURA",
+        "THALITA OLIVEIRA DO PRADO",
+        "ANA CAROLINA MORAES FERREIRA",
+        "GEOVANA GARCIA SEIXAS",
+        "GUSTAVO SPOSITO",
+        "VINICIUS ALVES ROCHA DOS SANTOS",
+        "ANDRESSA SILVA SANTOS"
+      ],
+      "faltas": [
+        30,
+        20,
+        11,
+        11,
+        11,
+        10,
+        10,
+        10,
+        10,
+        10
+      ],
+      "atrasos": [
+        0,
+        1,
+        1,
+        0,
+        0,
+        1,
+        1,
+        1,
+        1,
+        0
+      ]
+    }
+  },
+  "registros": [
+    {
+      "Nome": "GIULIA LUZ FARIA DA CRUZ",
+      "Google": "Sim",
+      "Faltas": 30,
+      "Atrasos": 0
+    },
+    {
+      "Nome": "ANA CAROLINE CARDOSO DA ROCHA",
+      "Google": "Sim",
+      "Faltas": 20,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "PIETRA RIBEIRO TAVEIRA",
+      "Google": "Sim",
+      "Faltas": 11,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "MARIANA MOREIRA MOURA",
+      "Google": "Sim",
+      "Faltas": 11,
+      "Atrasos": 0
+    },
+    {
+      "Nome": "THALITA OLIVEIRA DO PRADO",
+      "Google": "Sim",
+      "Faltas": 11,
+      "Atrasos": 0
+    },
+    {
+      "Nome": "ANA CAROLINA MORAES FERREIRA",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "GEOVANA GARCIA SEIXAS",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "GUSTAVO SPOSITO",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "VINICIUS ALVES ROCHA DOS SANTOS",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "ANDRESSA SILVA SANTOS",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 0
+    },
+    {
+      "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 0
+    },
+    {
+      "Nome": "MARIA EDUARDA DOS SANTOS",
+      "Google": "Sim",
+      "Faltas": 10,
+      "Atrasos": 0
+    },
+    {
+      "Nome": "SARAH BERTOLINO DOS SANTOS",
+      "Google": "Sim",
+      "Faltas": 5,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "JULIANA OLIVEIRA MACHADO",
+      "Google": "Sim",
+      "Faltas": 3,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "BIANCA TELES DA SILVA",
+      "Google": "Sim",
+      "Faltas": 2,
+      "Atrasos": 3
+    },
+    {
+      "Nome": "THAYNA CORREIA DOS SANTOS",
+      "Google": "Sim",
+      "Faltas": 2,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "ERIC RODRIGUES MOTA CORRÊA",
+      "Google": "Sim",
+      "Faltas": 0,
+      "Atrasos": 3
+    },
+    {
+      "Nome": "LUCAS FRANÇA DA SILVA",
+      "Google": "Sim",
+      "Faltas": 0,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "MARIA EDUARDA AMARAL SANTOS",
+      "Google": "Sim",
+      "Faltas": 0,
+      "Atrasos": 1
+    },
+    {
+      "Nome": "ARTHUR LUCENA ARAUJO",
+      "Google": "Sim",
+      "Faltas": 0,
+      "Atrasos": 0
+    }
+  ]
+}

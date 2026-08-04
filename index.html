@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Acompanhamento Google - Faltas & Atrasos</title>
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(26, 34, 52, 0.75);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-purple: #8b5cf6;
+      --accent-rose: #f43f5e;
+      --accent-amber: #f59e0b;
+      --accent-emerald: #10b981;
+      --accent-blue: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(139, 92, 246, 0.15), transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(244, 63, 94, 0.12), transparent 40%);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding: 2rem 1.5rem;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--card-border);
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .header-title h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, #a78bfa, #f43f5e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .header-title p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 0.3rem;
+    }
+
+    .badge-status {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.4rem 0.9rem;
+      border-radius: 9999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* KPI Grid */
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    .kpi-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      transition: transform 0.2s ease, border-color 0.2s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .kpi-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+    }
+
+    .kpi-title {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .kpi-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .icon-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
+    .icon-rose { background: rgba(244, 63, 94, 0.15); color: var(--accent-rose); }
+    .icon-amber { background: rgba(245, 158, 11, 0.15); color: var(--accent-amber); }
+    .icon-purple { background: rgba(139, 92, 246, 0.15); color: var(--accent-purple); }
+
+    .kpi-value {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin-bottom: 0.25rem;
+    }
+
+    .kpi-subtext {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    /* Charts Section */
+    .charts-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 1.25rem;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 1024px) {
+      .charts-grid { grid-template-columns: 1fr; }
+    }
+
+    .chart-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .chart-header {
+      margin-bottom: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .chart-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .canvas-container {
+      position: relative;
+      width: 100%;
+      height: 320px;
+    }
+
+    /* Table Section */
+    .table-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--card-border);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      margin-bottom: 2rem;
+    }
+
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.25rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      max-width: 400px;
+    }
+
+    .search-box i {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+    }
+
+    .search-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--card-border);
+      border-radius: 0.6rem;
+      padding: 0.65rem 1rem 0.65rem 2.5rem;
+      color: var(--text-main);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-purple);
+    }
+
+    .btn-export {
+      background: linear-gradient(135deg, var(--accent-purple), #7c3aed);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.25rem;
+      border-radius: 0.6rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: opacity 0.2s ease;
+    }
+
+    .btn-export:hover { opacity: 0.9; }
+
+    .table-wrapper {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: rgba(15, 23, 42, 0.7);
+      color: var(--text-muted);
+      font-weight: 600;
+      padding: 0.9rem 1rem;
+      border-bottom: 1px solid var(--card-border);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .rank-badge {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.8rem;
+    }
+
+    .rank-1 { background: rgba(244, 63, 94, 0.2); color: var(--accent-rose); border: 1px solid var(--accent-rose); }
+    .rank-2 { background: rgba(245, 158, 11, 0.2); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
+    .rank-3 { background: rgba(59, 130, 246, 0.2); color: var(--accent-blue); border: 1px solid var(--accent-blue); }
+    .rank-default { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); }
+
+    .tag-google {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--accent-emerald);
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+
+    .num-faults {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent-rose);
+    }
+
+    .num-delays {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 1.05rem;
+      color: var(--accent-amber);
+    }
+
+    footer {
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--card-border);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="header-title">
+        <h1><i class="fa-solid fa-graduation-cap"></i> Acompanhamento Google</h1>
+        <p>Painel de Frequência e Pontualidade dos Alunos (Filtro: Google == Sim | Ordenado por Faltas & Atrasos)</p>
+      </div>
+      <div>
+        <span class="badge-status">
+          <i class="fa-solid fa-circle-check"></i> Dados Sincronizados
+        </span>
+      </div>
+    </header>
+
+    <!-- KPI Cards Grid -->
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Alunos 'Google: Sim'</span>
+          <div class="kpi-icon icon-emerald"><i class="fa-solid fa-user-check"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-total-alunos">20</div>
+        <div class="kpi-subtext">Alunos selecionados e ordenados</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Total de Faltas</span>
+          <div class="kpi-icon icon-rose"><i class="fa-solid fa-user-xmark"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-total-faltas" style="color: var(--accent-rose);">170</div>
+        <div class="kpi-subtext" id="kpi-sub-faltas">Média: 8.5 faltas/aluno</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Total de Atrasos</span>
+          <div class="kpi-icon icon-amber"><i class="fa-solid fa-clock"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-total-atrasos" style="color: var(--accent-amber);">17</div>
+        <div class="kpi-subtext" id="kpi-sub-atrasos">Pontualidade monitorada</div>
+      </div>
+
+      <div class="kpi-card">
+        <div class="kpi-header">
+          <span class="kpi-title">Maior Número de Faltas</span>
+          <div class="kpi-icon icon-purple"><i class="fa-solid fa-triangle-exclamation"></i></div>
+        </div>
+        <div class="kpi-value" id="kpi-top-aluno-faltas" style="font-size: 1.5rem; color: var(--accent-purple);">30 Faltas</div>
+        <div class="kpi-subtext" id="kpi-top-aluno-nome">GIULIA LUZ FARIA DA CRUZ</div>
+      </div>
+    </div>
+
+    <!-- Charts Grid -->
+    <div class="charts-grid">
+      <div class="chart-card">
+        <div class="chart-header">
+          <span class="chart-title"><i class="fa-solid fa-chart-simple" style="color: var(--accent-purple);"></i> Top Alunos por Faltas e Atrasos</span>
+        </div>
+        <div class="canvas-container">
+          <canvas id="chartRanking"></canvas>
+        </div>
+      </div>
+
+      <div class="chart-card">
+        <div class="chart-header">
+          <span class="chart-title"><i class="fa-solid fa-chart-pie" style="color: var(--accent-rose);"></i> Proporção Faltas x Atrasos</span>
+        </div>
+        <div class="canvas-container">
+          <canvas id="chartDoughnut"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <!-- Table Section -->
+    <div class="table-card">
+      <div class="table-controls">
+        <div class="chart-title"><i class="fa-solid fa-list-ol" style="color: var(--accent-emerald);"></i> Ranking Geral dos Alunos (Google == Sim)</div>
+        <div class="search-box">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar por nome do aluno...">
+        </div>
+        <button class="btn-export" id="btnExportCSV"><i class="fa-solid fa-file-csv"></i> Exportar CSV</button>
+      </div>
+
+      <div class="table-wrapper">
+        <table>
+          <thead>
+            <tr>
+              <th># Posição</th>
+              <th>Nome do Aluno</th>
+              <th>Status Google</th>
+              <th>Faltas</th>
+              <th>Atrasos</th>
+              <th>Situação / Alerta</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <!-- Linhas dinâmicas -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>Dashboard de Acompanhamento Google • Gerado Automaticamente para GitHub Pages • Atualizado em <span id="lastUpdated">-</span></p>
+    </footer>
+  </div>
+
+  <script>
+    // Dados com fallback embutido
+    let rawData = {
+      "metadata": { "atualizado_em": new Date().toLocaleString('pt-BR'), "total_registros_filtrados": 20 },
+      "kpis": [
+        { "titulo": "Alunos 'Google: Sim'", "valor": "20" },
+        { "titulo": "Total de Faltas", "valor": "170" },
+        { "titulo": "Total de Atrasos", "valor": "17" }
+      ],
+      "registros": [
+        { "Nome": "GIULIA LUZ FARIA DA CRUZ", "Google": "Sim", "Faltas": 30, "Atrasos": 0 },
+        { "Nome": "ANA CAROLINE CARDOSO DA ROCHA", "Google": "Sim", "Faltas": 20, "Atrasos": 1 },
+        { "Nome": "MARIANA MOREIRA MOURA", "Google": "Sim", "Faltas": 11, "Atrasos": 0 },
+        { "Nome": "THALITA OLIVEIRA DO PRADO", "Google": "Sim", "Faltas": 11, "Atrasos": 0 },
+        { "Nome": "PIETRA RIBEIRO TAVEIRA", "Google": "Sim", "Faltas": 11, "Atrasos": 1 },
+        { "Nome": "ANA CAROLINA MORAES FERREIRA", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
+        { "Nome": "GEOVANA GARCIA SEIXAS", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
+        { "Nome": "GUSTAVO SPOSITO", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
+        { "Nome": "VINICIUS ALVES ROCHA DOS SANTOS", "Google": "Sim", "Faltas": 10, "Atrasos": 1 },
+        { "Nome": "ANDRESSA SILVA SANTOS", "Google": "Sim", "Faltas": 10, "Atrasos": 0 },
+        { "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA", "Google": "Sim", "Faltas": 10, "Atrasos": 0 },
+        { "Nome": "MARIA EDUARDA DOS SANTOS", "Google": "Sim", "Faltas": 10, "Atrasos": 0 },
+        { "Nome": "SARAH BERTOLINO DOS SANTOS", "Google": "Sim", "Faltas": 5, "Atrasos": 1 },
+        { "Nome": "JULIANA OLIVEIRA MACHADO", "Google": "Sim", "Faltas": 3, "Atrasos": 1 },
+        { "Nome": "BIANCA TELES DA SILVA", "Google": "Sim", "Faltas": 2, "Atrasos": 3 },
+        { "Nome": "THAYNA CORREIA DOS SANTOS", "Google": "Sim", "Faltas": 2, "Atrasos": 1 },
+        { "Nome": "ERIC RODRIGUES MOTA CORRÊA", "Google": "Sim", "Faltas": 0, "Atrasos": 3 },
+        { "Nome": "LUCAS FRANÇA DA SILVA", "Google": "Sim", "Faltas": 0, "Atrasos": 1 },
+        { "Nome": "MARIA EDUARDA AMARAL SANTOS", "Google": "Sim", "Faltas": 0, "Atrasos": 1 },
+        { "Nome": "ARTHUR LUCENA ARAUJO", "Google": "Sim", "Faltas": 0, "Atrasos": 0 }
+      ]
+    };
+
+    let chartRankingInstance = null;
+    let chartDoughnutInstance = null;
+
+    async function carregarDados() {
+      try {
+        const resp = await fetch('./dashboard/data.json');
+        if (resp.ok) {
+          const json = await resp.json();
+          if (json && json.registros && json.registros.length > 0) {
+            rawData = json;
+          }
+        }
+      } catch (e) {
+        console.log("Usando dados embutidos de fallback.");
+      }
+      renderizarDashboard(rawData.registros);
+    }
+
+    function renderizarDashboard(registros) {
+      // Ordenação estrita: Faltas desc, Atrasos desc
+      registros.sort((a, b) => (b.Faltas - a.Faltas) || (b.Atrasos - a.Atrasos));
+
+      // Atualiza KPIs
+      const totalAlunos = registros.length;
+      const totalFaltas = registros.reduce((acc, r) => acc + (Number(r.Faltas) || 0), 0);
+      const totalAtrasos = registros.reduce((acc, r) => acc + (Number(r.Atrasos) || 0), 0);
+      const mediaFaltas = (totalFaltas / (totalAlunos || 1)).toFixed(1);
+
+      document.getElementById('kpi-total-alunos').textContent = totalAlunos;
+      document.getElementById('kpi-total-faltas').textContent = totalFaltas;
+      document.getElementById('kpi-sub-faltas').textContent = `Média: ${mediaFaltas} faltas/aluno`;
+      document.getElementById('kpi-total-atrasos').textContent = totalAtrasos;
+
+      if (registros.length > 0) {
+        document.getElementById('kpi-top-aluno-faltas').textContent = `${registros[0].Faltas} Faltas`;
+        document.getElementById('kpi-top-aluno-nome').textContent = registros[0].Nome;
+      }
+
+      document.getElementById('lastUpdated').textContent = rawData.metadata?.atualizado_em || new Date().toLocaleString('pt-BR');
+
+      // Tabela
+      renderizarTabela(registros);
+
+      // Gráficos
+      renderizarGraficos(registros, totalFaltas, totalAtrasos);
+    }
+
+    function renderizarTabela(registros) {
+      const tbody = document.getElementById('tableBody');
+      tbody.innerHTML = '';
+
+      registros.forEach((r, idx) => {
+        const tr = document.createElement('tr');
+        const pos = idx + 1;
+        
+        let rankClass = 'rank-default';
+        if (pos === 1) rankClass = 'rank-1';
+        else if (pos === 2) rankClass = 'rank-2';
+        else if (pos === 3) rankClass = 'rank-3';
+
+        let situacaoBadge = '<span style="color: #10b981; font-weight:600;"><i class="fa-solid fa-check"></i> Normal</span>';
+        if (r.Faltas >= 15) {
+          situacaoBadge = '<span style="color: #f43f5e; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Crítico</span>';
+        } else if (r.Faltas >= 10) {
+          situacaoBadge = '<span style="color: #f59e0b; font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> Atenção</span>';
+        }
+
+        tr.innerHTML = `
+          <td><span class="rank-badge ${rankClass}">${pos}</span></td>
+          <td style="font-weight: 600;">${r.Nome}</td>
+          <td><span class="tag-google"><i class="fa-brands fa-google"></i> ${r.Google}</span></td>
+          <td class="num-faults">${r.Faltas}</td>
+          <td class="num-delays">${r.Atrasos}</td>
+          <td>${situacaoBadge}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function renderizarGraficos(registros, totalFaltas, totalAtrasos) {
+      const top10 = registros.slice(0, 8);
+      const labels = top10.map(r => r.Nome.length > 18 ? r.Nome.substring(0, 18) + '...' : r.Nome);
+      const faltas = top10.map(r => r.Faltas);
+      const atrasos = top10.map(r => r.Atrasos);
+
+      if (chartRankingInstance) chartRankingInstance.destroy();
+      if (chartDoughnutInstance) chartDoughnutInstance.destroy();
+
+      const ctxRanking = document.getElementById('chartRanking').getContext('2d');
+      chartRankingInstance = new Chart(ctxRanking, {
+        type: 'bar',
+        data: {
+          labels: labels,
+          datasets: [
+            {
+              label: 'Faltas',
+              data: faltas,
+              backgroundColor: 'rgba(244, 63, 94, 0.85)',
+              borderRadius: 6
+            },
+            {
+              label: 'Atrasos',
+              data: atrasos,
+              backgroundColor: 'rgba(245, 158, 11, 0.85)',
+              borderRadius: 6
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { labels: { color: '#94a3b8', font: { family: 'Inter' } } }
+          },
+          scales: {
+            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
+            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+          }
+        }
+      });
+
+      const ctxDoughnut = document.getElementById('chartDoughnut').getContext('2d');
+      chartDoughnutInstance = new Chart(ctxDoughnut, {
+        type: 'doughnut',
+        data: {
+          labels: ['Faltas', 'Atrasos'],
+          datasets: [{
+            data: [totalFaltas, totalAtrasos],
+            backgroundColor: ['rgba(244, 63, 94, 0.85)', 'rgba(245, 158, 11, 0.85)'],
+            borderWidth: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+          }
+        }
+      });
+    }
+
+    // Busca ao digitar
+    document.getElementById('searchInput').addEventListener('input', function(e) {
+      const term = e.target.value.toLowerCase().trim();
+      const filtrados = rawData.registros.filter(r => r.Nome.toLowerCase().includes(term));
+      renderizarTabela(filtrados);
+    });
+
+    // Exportação CSV
+    document.getElementById('btnExportCSV').addEventListener('click', function() {
+      let csv = 'Posição,Nome,Google,Faltas,Atrasos\n';
+      rawData.registros.forEach((r, idx) => {
+        csv += `${idx + 1},"${r.Nome}",${r.Google},${r.Faltas},${r.Atrasos}\n`;
+      });
+      const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `Acompanhamento_Google_${new Date().toISOString().slice(0,10)}.csv`;
+      a.click();
+    });
+
+    carregarDados();
+  </script>
+</body>
+</html>
