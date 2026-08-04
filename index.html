@@ -535,38 +535,636 @@
   <script>
     // Fallback completo com Faltas em Aulas (30 Aulas = 3 Dias = 30% do limite de reprovação)
     let rawData = {
-      "metadata": { 
-        "atualizado_em": new Date().toLocaleString('pt-BR'),
-        "turmas_disponiveis": ["1° Semestre", "3° Semestre"],
-        "dias_decorridos": 3,
-        "aulas_decorridas": 30,
-        "total_dias_curso": 40,
-        "total_aulas_curso": 400
-      },
-      "registros": [
-        { "Nome": "GIULIA LUZ FARIA DA CRUZ", "Turma": "1° Semestre", "Faltas_Aulas": 30, "Faltas_Dias": 3.0, "Presenca_Pct": 0.0, "Pct_Limite": 30.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "JUNIOR GOMES DA SILVA", "Turma": "1° Semestre", "Faltas_Aulas": 30, "Faltas_Dias": 3.0, "Presenca_Pct": 0.0, "Pct_Limite": 30.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "ANA CAROLINE CARDOSO DA ROCHA", "Turma": "1° Semestre", "Faltas_Aulas": 20, "Faltas_Dias": 2.0, "Presenca_Pct": 33.3, "Pct_Limite": 20.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "MARIANA MOREIRA MOURA", "Turma": "1° Semestre", "Faltas_Aulas": 11, "Faltas_Dias": 1.1, "Presenca_Pct": 63.3, "Pct_Limite": 11.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "THALITA OLIVEIRA DO PRADO", "Turma": "1° Semestre", "Faltas_Aulas": 11, "Faltas_Dias": 1.1, "Presenca_Pct": 63.3, "Pct_Limite": 11.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "PIETRA RIBEIRO TAVEIRA", "Turma": "1° Semestre", "Faltas_Aulas": 11, "Faltas_Dias": 1.1, "Presenca_Pct": 63.3, "Pct_Limite": 11.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "ANA CAROLINA MORAES FERREIRA", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "GEOVANA GARCIA SEIXAS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "GUSTAVO SPOSITO", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "VINICIUS ALVES ROCHA DOS SANTOS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "ANDRESSA SILVA SANTOS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "MARIA EDUARDA DOS SANTOS", "Turma": "1° Semestre", "Faltas_Aulas": 10, "Faltas_Dias": 1.0, "Presenca_Pct": 66.7, "Pct_Limite": 10.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "SARAH BERTOLINO DOS SANTOS", "Turma": "3° Semestre", "Faltas_Aulas": 5, "Faltas_Dias": 0.5, "Presenca_Pct": 83.3, "Pct_Limite": 5.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "JULIANA OLIVEIRA MACHADO", "Turma": "3° Semestre", "Faltas_Aulas": 3, "Faltas_Dias": 0.3, "Presenca_Pct": 90.0, "Pct_Limite": 3.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "BIANCA TELES DA SILVA", "Turma": "3° Semestre", "Faltas_Aulas": 2, "Faltas_Dias": 0.2, "Presenca_Pct": 93.3, "Pct_Limite": 2.0, "Atrasos": 3, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "THAYNA CORREIA DOS SANTOS", "Turma": "3° Semestre", "Faltas_Aulas": 2, "Faltas_Dias": 0.2, "Presenca_Pct": 93.3, "Pct_Limite": 2.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "ERIC RODRIGUES MOTA CORRÊA", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Presenca_Pct": 100.0, "Pct_Limite": 0.0, "Atrasos": 3, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "LUCAS FRANÇA DA SILVA", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Presenca_Pct": 100.0, "Pct_Limite": 0.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "MARIA EDUARDA AMARAL SANTOS", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Presenca_Pct": 100.0, "Pct_Limite": 0.0, "Atrasos": 1, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" },
-        { "Nome": "ARTHUR LUCENA ARAUJO", "Turma": "3° Semestre", "Faltas_Aulas": 0, "Faltas_Dias": 0.0, "Presenca_Pct": 100.0, "Pct_Limite": 0.0, "Atrasos": 0, "Situacao": "Regular (< 40 Aulas)", "Nivel": "normal" }
-      ]
-    };
+  "metadata": {
+    "atualizado_em": "04/08/2026 11:07:57",
+    "data_execucao": "04/08/2026",
+    "total_registros": 53,
+    "turmas_disponiveis": [
+      "1° Semestre",
+      "3° Semestre"
+    ],
+    "dias_decorridos": 3,
+    "aulas_decorridas": 30,
+    "total_dias_curso": 40,
+    "total_aulas_curso": 400,
+    "proxima_aula": "07/08/2026"
+  },
+  "kpis": [
+    {
+      "titulo": "Total de Alunos Monitorados",
+      "valor": "53",
+      "subtexto": "Alunos em 2 turma(s)",
+      "icone": "fa-users",
+      "cor": "emerald"
+    },
+    {
+      "titulo": "Progresso de Aulas Ministradas",
+      "valor": "30 / 400 Aulas",
+      "subtexto": "3 de 40 Dias de aula ocorridos até hoje",
+      "icone": "fa-calendar-check",
+      "cor": "purple"
+    },
+    {
+      "titulo": "Frequência Média Geral",
+      "valor": "86.4%",
+      "subtexto": "Presença média acumulada nas aulas dadas",
+      "icone": "fa-chart-line",
+      "cor": "blue"
+    },
+    {
+      "titulo": "Alunos com Limite Atingido",
+      "valor": "0 Aluno(s)",
+      "subtexto": "Com 100 ou mais aulas faltadas",
+      "icone": "fa-shield-cat",
+      "cor": "emerald"
+    }
+  ],
+  "registros": [
+    {
+      "Nome": "GIULIA LUZ FARIA DA CRUZ",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 30,
+      "Faltas_Dias": 3.0,
+      "Presenca_Pct": 0.0,
+      "Pct_Limite": 30.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "JUNIOR GOMES DA SILVA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 30,
+      "Faltas_Dias": 3.0,
+      "Presenca_Pct": 0.0,
+      "Pct_Limite": 30.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ANA CAROLINE CARDOSO DA ROCHA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 20,
+      "Faltas_Dias": 2.0,
+      "Presenca_Pct": 33.3,
+      "Pct_Limite": 20.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "PIETRA RIBEIRO TAVEIRA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 11,
+      "Faltas_Dias": 1.1,
+      "Presenca_Pct": 63.3,
+      "Pct_Limite": 11.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "MARIANA MOREIRA MOURA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 11,
+      "Faltas_Dias": 1.1,
+      "Presenca_Pct": 63.3,
+      "Pct_Limite": 11.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "THALITA OLIVEIRA DO PRADO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 11,
+      "Faltas_Dias": 1.1,
+      "Presenca_Pct": 63.3,
+      "Pct_Limite": 11.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "SAMUEL RENATO PEREIRA DA SILVA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 2,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ANA CAROLINA MORAES FERREIRA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GEOVANA GARCIA SEIXAS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUILHERME SILVA MARIOTI",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUSTAVO SPOSITO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "VINICIUS ALVES ROCHA DOS SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ANDRESSA SILVA SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "MARIA EDUARDA DOS SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 10,
+      "Faltas_Dias": 1.0,
+      "Presenca_Pct": 66.7,
+      "Pct_Limite": 10.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "SARAH BERTOLINO DOS SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 5,
+      "Faltas_Dias": 0.5,
+      "Presenca_Pct": 83.3,
+      "Pct_Limite": 5.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "JULIANA OLIVEIRA MACHADO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 3,
+      "Faltas_Dias": 0.3,
+      "Presenca_Pct": 90.0,
+      "Pct_Limite": 3.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "BIANCA TELES DA SILVA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 2,
+      "Faltas_Dias": 0.2,
+      "Presenca_Pct": 93.3,
+      "Pct_Limite": 2.0,
+      "Atrasos": 3,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "CAIO HENRIQUE BARBOSA DA SILVA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 2,
+      "Faltas_Dias": 0.2,
+      "Presenca_Pct": 93.3,
+      "Pct_Limite": 2.0,
+      "Atrasos": 3,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "THAYNA CORREIA DOS SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 2,
+      "Faltas_Dias": 0.2,
+      "Presenca_Pct": 93.3,
+      "Pct_Limite": 2.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ERIC RODRIGUES MOTA CORRÊA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 3,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LAURA ANGÉLICA MEDEIRO COSTA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LUCAS FRANÇA DA SILVA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "MARIA EDUARDA AMARAL SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 1,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ANA JULIA PEREIRA ALBUQUERQUE",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "DIOGO BAPTISTA DA SILVA DO CARMO",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ENZO MOREIRA REIS",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ERIKA SABRINA DA SILVA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GABRIEL HENRIQUE PEREIRA MEIRA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GABRIEL NALIN DE JESUS",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GIOVANNA LIMA DE SOUZA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUSTAVO SAMPAIO MOREIRA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "HENRIQUE BONUGLI DE OLIVEIRA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "KAUÃ PEREIRA MOREIRA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LARA GOMEZ DE LIMA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LETÍCIA LUZIA MELO VIDAL",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LUCAS SAMUEL DE SOUZA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "MANOELA PAULA DE OLIVEIRA BARROS",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "MARIA EDUARDA MATOS NEVES",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "PEDRO MANOEL CARDOSO BEZERRA",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "QUEZIA OLIVEIRA DOS SANTOS",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "REBECA GONÇALVES LUIZ",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "SIDHARTA GARCIA MARTINS",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "SIMONE STRUTZEL FABRETI",
+      "Turma": "1° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "ARTHUR LUCENA ARAUJO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "BRUNO ATAIDE LIMA DOURADO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "BRUNO TAVARES PELLEGRINO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "EVANDRO JOSE DIAZ VIANA DOS SANTOS",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "FERNANDA MARTINS DA CRUZ",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUSTAVO GABRIEL DOS SANTOS PEDRO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "GUSTAVO SANTANA DE OLIVEIRA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LEONARDO FURLAN SILVA",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LUCCAS GARCIA MELO",
+      "Turma": "3° Semestre",
+      "Faltas_Aulas": 0,
+      "Faltas_Dias": 0.0,
+      "Presenca_Pct": 100.0,
+      "Pct_Limite": 0.0,
+      "Atrasos": 0,
+      "Situacao": "Regular (< 40 Aulas)",
+      "Nivel": "normal"
+    }
+  ]
+};
 
     let chartRankingInstance = null;
     let chartDoughnutInstance = null;
