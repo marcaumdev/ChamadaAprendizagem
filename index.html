@@ -57,7 +57,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       padding-bottom: 1rem;
       border-bottom: 1px solid var(--card-border);
       flex-wrap: wrap;
@@ -68,7 +68,7 @@
       font-family: 'Outfit', sans-serif;
       font-size: 2.1rem;
       font-weight: 800;
-      background: #fafafa;
+      background: linear-gradient(135deg, #a78bfa, #f43f5e);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       display: flex;
@@ -85,7 +85,7 @@
     .header-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
     }
 
@@ -93,12 +93,13 @@
       background: rgba(30, 41, 59, 0.9);
       color: var(--text-main);
       border: 1px solid var(--card-border);
-      padding: 0.6rem 1rem;
+      padding: 0.65rem 1rem;
       border-radius: 0.6rem;
       font-size: 0.9rem;
       font-weight: 600;
       outline: none;
       cursor: pointer;
+      min-height: 44px;
       transition: border-color 0.2s ease;
     }
 
@@ -110,13 +111,14 @@
       background: rgba(139, 92, 246, 0.15);
       color: var(--accent-purple);
       border: 1px solid rgba(139, 92, 246, 0.3);
-      padding: 0.5rem 1rem;
+      padding: 0.6rem 1rem;
       border-radius: 9999px;
       font-size: 0.85rem;
       font-weight: 600;
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      min-height: 44px;
     }
 
     /* Rule Banner */
@@ -147,7 +149,7 @@
     /* KPI Grid */
     .kpi-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
       gap: 1.25rem;
       margin-bottom: 2rem;
     }
@@ -157,7 +159,7 @@
       backdrop-filter: blur(12px);
       border: 1px solid var(--card-border);
       border-radius: 1rem;
-      padding: 1.5rem;
+      padding: 1.25rem 1.5rem;
       transition: transform 0.2s ease, border-color 0.2s ease;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
     }
@@ -171,23 +173,24 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
 
     .kpi-title {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--text-muted);
       font-weight: 500;
     }
 
     .kpi-icon {
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
       border-radius: 0.75rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
+      flex-shrink: 0;
     }
 
     .icon-emerald { background: rgba(16, 185, 129, 0.15); color: var(--accent-emerald); }
@@ -200,7 +203,7 @@
       font-family: 'Outfit', sans-serif;
       font-size: 2.1rem;
       font-weight: 800;
-      margin-bottom: 0.25rem;
+      margin-bottom: 0.2rem;
     }
 
     .kpi-subtext {
@@ -214,10 +217,6 @@
       grid-template-columns: 2fr 1fr;
       gap: 1.25rem;
       margin-bottom: 2rem;
-    }
-
-    @media (max-width: 1024px) {
-      .charts-grid { grid-template-columns: 1fr; }
     }
 
     .chart-card {
@@ -238,7 +237,7 @@
 
     .chart-title {
       font-family: 'Outfit', sans-serif;
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       display: flex;
       align-items: center;
@@ -274,7 +273,7 @@
     .search-box {
       position: relative;
       flex: 1;
-      max-width: 400px;
+      min-width: 240px;
     }
 
     .search-box i {
@@ -294,6 +293,7 @@
       color: var(--text-main);
       font-size: 0.9rem;
       outline: none;
+      min-height: 44px;
       transition: border-color 0.2s ease;
     }
 
@@ -312,24 +312,39 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
+      min-height: 44px;
       transition: opacity 0.2s ease;
+      white-space: nowrap;
     }
 
     .btn-export:hover { opacity: 0.9; }
 
+    .mobile-scroll-hint {
+      display: none;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-muted);
+      font-size: 0.78rem;
+      margin-bottom: 0.75rem;
+      font-weight: 500;
+    }
+
     .table-wrapper {
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 0.6rem;
     }
 
     table {
       width: 100%;
+      min-width: 800px;
       border-collapse: collapse;
       text-align: left;
       font-size: 0.9rem;
     }
 
     th {
-      background: rgba(15, 23, 42, 0.7);
+      background: rgba(15, 23, 42, 0.85);
       color: var(--text-muted);
       font-weight: 600;
       padding: 0.9rem 1rem;
@@ -337,11 +352,13 @@
       text-transform: uppercase;
       font-size: 0.75rem;
       letter-spacing: 0.05em;
+      white-space: nowrap;
     }
 
     td {
-      padding: 1rem;
+      padding: 0.9rem 1rem;
       border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      white-space: nowrap;
     }
 
     tr:hover td {
@@ -372,7 +389,7 @@
     }
 
     .limit-progress-container {
-      width: 140px;
+      width: 130px;
       background: rgba(255, 255, 255, 0.08);
       border-radius: 9999px;
       height: 8px;
@@ -398,6 +415,139 @@
       margin-top: 2rem;
       padding-top: 1rem;
       border-top: 1px solid var(--card-border);
+    }
+
+    /* ==========================================================================
+       MEDIA QUERIES PARA RESPONSIVIDADE EM MOVILES E TABLETS
+       ========================================================================== */
+    
+    @media (max-width: 1024px) {
+      .charts-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 1rem 0.75rem;
+      }
+
+      header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+      }
+
+      .header-title h1 {
+        font-size: 1.5rem;
+      }
+
+      .header-title p {
+        font-size: 0.85rem;
+      }
+
+      .header-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filter-select, .badge-status {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .rule-banner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+        padding: 0.85rem 1rem;
+        font-size: 0.85rem;
+      }
+
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+      }
+
+      .kpi-card {
+        padding: 1rem;
+        border-radius: 0.85rem;
+      }
+
+      .kpi-value {
+        font-size: 1.4rem;
+      }
+
+      .kpi-title {
+        font-size: 0.78rem;
+      }
+
+      .kpi-subtext {
+        font-size: 0.72rem;
+      }
+
+      .kpi-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 0.95rem;
+        border-radius: 0.5rem;
+      }
+
+      .chart-card, .table-card {
+        padding: 1rem;
+        border-radius: 0.85rem;
+      }
+
+      .chart-title {
+        font-size: 1rem;
+      }
+
+      .canvas-container {
+        height: 280px;
+      }
+
+      .table-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+      }
+
+      .search-box {
+        max-width: 100%;
+      }
+
+      .btn-export {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .mobile-scroll-hint {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .kpi-card {
+        padding: 0.85rem;
+      }
+
+      .kpi-value {
+        font-size: 1.25rem;
+      }
+
+      .header-title h1 {
+        font-size: 1.3rem;
+      }
+
+      .canvas-container {
+        height: 240px;
+      }
     }
   </style>
 </head>
@@ -437,16 +587,16 @@
     <div class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Total de Alunos Monitorados</span>
+          <span class="kpi-title">Total de Alunos</span>
           <div class="kpi-icon icon-emerald"><i class="fa-solid fa-users"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-total-alunos">33</div>
-        <div class="kpi-subtext" id="kpi-sub-turma">Alunos na turma selecionada</div>
+        <div class="kpi-value" id="kpi-total-alunos">30</div>
+        <div class="kpi-subtext" id="kpi-sub-turma">Alunos Google selecionados</div>
       </div>
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Aulas Dadas até Hoje</span>
+          <span class="kpi-title">Aulas Ministradas</span>
           <div class="kpi-icon icon-purple"><i class="fa-solid fa-graduation-cap"></i></div>
         </div>
         <div class="kpi-value" id="kpi-aulas-dadas" style="color: var(--accent-purple);">30 / 400 Aulas</div>
@@ -455,16 +605,16 @@
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Frequência Média da Turma</span>
+          <span class="kpi-title">Frequência Média</span>
           <div class="kpi-icon icon-blue"><i class="fa-solid fa-chart-line"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-media-frequencia" style="color: var(--accent-blue);">96.5%</div>
-        <div class="kpi-subtext">Taxa de presença acumulada</div>
+        <div class="kpi-value" id="kpi-media-frequencia" style="color: var(--accent-blue);">85.0%</div>
+        <div class="kpi-subtext">Taxa de presença dos alunos</div>
       </div>
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Alunos com Limite Atingido</span>
+          <span class="kpi-title">Limite Atingido</span>
           <div class="kpi-icon icon-rose"><i class="fa-solid fa-shield-cat"></i></div>
         </div>
         <div class="kpi-value" id="kpi-alunos-criticos" style="color: var(--accent-emerald);">0 Alunos</div>
@@ -504,6 +654,10 @@
         <button class="btn-export" id="btnExportCSV"><i class="fa-solid fa-file-csv"></i> Exportar CSV</button>
       </div>
 
+      <div class="mobile-scroll-hint">
+        <i class="fa-solid fa-arrows-left-right"></i> Deslize para a esquerda para visualizar todas as colunas da tabela
+      </div>
+
       <div class="table-wrapper">
         <table>
           <thead>
@@ -533,11 +687,10 @@
   </div>
 
   <script>
-    // Fallback completo com Faltas em Aulas (30 Aulas = 3 Dias = 30% do limite de reprovação)
     let rawData = {
   "metadata": {
-    "atualizado_em": "04/08/2026 13:21:22",
-    "data_execucao": "04/08/2026",
+    "atualizado_em": "05/08/2026 08:30:38",
+    "data_execucao": "05/08/2026",
     "total_registros": 30,
     "turmas_disponiveis": [
       "1° Semestre",
@@ -957,7 +1110,7 @@
           }
         }
       } catch (e) {
-        console.log("Usando dados de fallback.");
+        console.log("Usando dados sincronizados do HTML.");
       }
 
       popularDropdownTurmas();
@@ -1088,8 +1241,9 @@
     }
 
     function renderizarGraficos(registros, aulasDecorridas) {
-      const top8 = registros.slice(0, 8);
-      const labels = top8.map(r => r.Nome.length > 18 ? r.Nome.substring(0, 18) + '...' : r.Nome);
+      const isMobile = window.innerWidth <= 640;
+      const top8 = registros.slice(0, isMobile ? 5 : 8);
+      const labels = top8.map(r => r.Nome.length > 16 ? r.Nome.substring(0, 16) + '...' : r.Nome);
       const aulas = top8.map(r => r.Faltas_Aulas);
       const dias = top8.map(r => r.Faltas_Dias);
 
@@ -1103,13 +1257,13 @@
           labels: labels,
           datasets: [
             {
-              label: 'Aulas Faltadas (Faltas)',
+              label: 'Aulas Faltadas',
               data: aulas,
               backgroundColor: 'rgba(167, 139, 250, 0.85)',
               borderRadius: 6
             },
             {
-              label: 'Dias de Ausência (Aulas / 10)',
+              label: 'Dias Ausentes',
               data: dias,
               backgroundColor: 'rgba(244, 63, 94, 0.85)',
               borderRadius: 6
@@ -1117,14 +1271,15 @@
           ]
         },
         options: {
+          indexAxis: isMobile ? 'y' : 'x', // Barras horizontais no mobile para máxima leitura!
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            legend: { labels: { color: '#94a3b8', font: { family: 'Inter' } } }
+            legend: { labels: { color: '#94a3b8', font: { family: 'Inter', size: isMobile ? 11 : 12 } } }
           },
           scales: {
-            x: { ticks: { color: '#94a3b8', font: { size: 10 } }, grid: { display: false } },
-            y: { ticks: { color: '#94a3b8' }, grid: { color: 'rgba(255,255,255,0.05)' } }
+            x: { ticks: { color: '#94a3b8', font: { size: isMobile ? 10 : 11 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y: { ticks: { color: '#94a3b8', font: { size: isMobile ? 10 : 11 } }, grid: { display: false } }
           }
         }
       });
@@ -1136,7 +1291,7 @@
       chartDoughnutInstance = new Chart(ctxDoughnut, {
         type: 'doughnut',
         data: {
-          labels: ['Aulas Assistidas (Presença)', 'Aulas Faltadas (Ausência)'],
+          labels: ['Aulas Assistidas', 'Aulas Faltadas'],
           datasets: [{
             data: [totalPresencas, totalAulasFaltas],
             backgroundColor: ['rgba(16, 185, 129, 0.85)', 'rgba(244, 63, 94, 0.85)'],
@@ -1147,19 +1302,25 @@
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
-            legend: { position: 'bottom', labels: { color: '#94a3b8' } }
+            legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: isMobile ? 11 : 12 } } }
           }
         }
       });
     }
 
+    window.addEventListener('resize', () => {
+      if (registrosFiltradosAtuais.length > 0) {
+        renderizarGraficos(registrosFiltradosAtuais, rawData.metadata?.aulas_decorridas || 30);
+      }
+    });
+
     document.getElementById('turmaSelect').addEventListener('change', aplicarFiltrosEAtualizar);
     document.getElementById('searchInput').addEventListener('input', aplicarFiltrosEAtualizar);
 
     document.getElementById('btnExportCSV').addEventListener('click', function() {
-      let csv = 'Posição,Nome,Turma,Faltas_Aulas,Faltas_Dias,Presença_Pct,Atrasos,Situação\n';
+      let csv = 'Posição,Nome,Turma,Google,Faltas_Aulas,Faltas_Dias,Presença_Pct,Atrasos,Situação\n';
       registrosFiltradosAtuais.forEach((r, idx) => {
-        csv += `${idx + 1},"${r.Nome}","${r.Turma}",${r.Faltas_Aulas},${r.Faltas_Dias},${r.Presenca_Pct}%,${r.Atrasos},"${r.Situacao}"\n`;
+        csv += `${idx + 1},"${r.Nome}","${r.Turma}","Sim",${r.Faltas_Aulas},${r.Faltas_Dias},${r.Presenca_Pct}%,${r.Atrasos},"${r.Situacao}"\n`;
       });
       const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
       const url = URL.createObjectURL(blob);
