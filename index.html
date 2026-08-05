@@ -64,13 +64,12 @@
       gap: 1rem;
     }
 
+    /* TÍTULO EM BRANCO PURO (SEM GRADIENTE) */
     .header-title h1 {
       font-family: 'Outfit', sans-serif;
       font-size: 2.1rem;
       font-weight: 800;
-      background: linear-gradient(135deg, #a78bfa, #f43f5e);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 0.75rem;
@@ -239,6 +238,7 @@
       font-family: 'Outfit', sans-serif;
       font-size: 1.15rem;
       font-weight: 700;
+      color: #ffffff;
       display: flex;
       align-items: center;
       gap: 0.5rem;
@@ -319,25 +319,13 @@
 
     .btn-export:hover { opacity: 0.9; }
 
-    .mobile-scroll-hint {
-      display: none;
-      align-items: center;
-      gap: 0.5rem;
-      color: var(--text-muted);
-      font-size: 0.78rem;
-      margin-bottom: 0.75rem;
-      font-weight: 500;
-    }
-
     .table-wrapper {
       overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
       border-radius: 0.6rem;
     }
 
     table {
       width: 100%;
-      min-width: 800px;
       border-collapse: collapse;
       text-align: left;
       font-size: 0.9rem;
@@ -418,7 +406,7 @@
     }
 
     /* ==========================================================================
-       MEDIA QUERIES PARA RESPONSIVIDADE EM MOVILES E TABLETS
+       MEDIA QUERIES - TABELA 100% RESPONSIVA EM CARDS NO MOBILE
        ========================================================================== */
     
     @media (max-width: 1024px) {
@@ -440,6 +428,7 @@
 
       .header-title h1 {
         font-size: 1.5rem;
+        color: #ffffff;
       }
 
       .header-title p {
@@ -501,6 +490,7 @@
 
       .chart-title {
         font-size: 1rem;
+        color: #ffffff;
       }
 
       .canvas-container {
@@ -522,8 +512,63 @@
         justify-content: center;
       }
 
-      .mobile-scroll-hint {
+      /* TRANSFORMANDO A TABELA EM CARDS 100% RESPONSIVOS NO MOBILE */
+      .table-card thead {
+        display: none;
+      }
+
+      .table-wrapper {
+        overflow: visible;
+      }
+
+      table {
+        min-width: 100% !important;
+        display: block;
+      }
+
+      tbody {
+        display: block;
+        width: 100%;
+      }
+
+      tbody tr {
+        display: block;
+        background: rgba(30, 41, 59, 0.5);
+        border: 1px solid var(--card-border);
+        border-radius: 0.85rem;
+        padding: 0.85rem 1rem;
+        margin-bottom: 0.85rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      }
+
+      tbody td {
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.55rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        white-space: normal;
+        text-align: right;
+        font-size: 0.88rem;
+      }
+
+      tbody td:last-child {
+        border-bottom: none;
+      }
+
+      tbody td::before {
+        content: attr(data-label);
+        font-weight: 600;
+        color: var(--text-muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        text-align: left;
+        padding-right: 0.5rem;
+      }
+
+      .limit-progress-container {
+        width: 110px;
       }
     }
 
@@ -646,16 +691,12 @@
     <!-- Table Section -->
     <div class="table-card">
       <div class="table-controls">
-        <div class="chart-title"><i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> Tabela de Frequência e Limite de Ausências (100 Aulas / 10 Dias)</div>
+        <div class="chart-title"><i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> Lista de Alunos e Limite de Ausências (100 Aulas / 10 Dias)</div>
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
           <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar aluno por nome...">
         </div>
         <button class="btn-export" id="btnExportCSV"><i class="fa-solid fa-file-csv"></i> Exportar CSV</button>
-      </div>
-
-      <div class="mobile-scroll-hint">
-        <i class="fa-solid fa-arrows-left-right"></i> Deslize para a esquerda para visualizar todas as colunas da tabela
       </div>
 
       <div class="table-wrapper">
@@ -689,7 +730,7 @@
   <script>
     let rawData = {
   "metadata": {
-    "atualizado_em": "05/08/2026 08:30:38",
+    "atualizado_em": "05/08/2026 08:56:28",
     "data_execucao": "05/08/2026",
     "total_registros": 30,
     "turmas_disponiveis": [
@@ -1221,20 +1262,20 @@
         }
 
         tr.innerHTML = `
-          <td><span class="rank-badge ${rankClass}">${pos}</span></td>
-          <td style="font-weight: 600;">${r.Nome}</td>
-          <td><span style="background:rgba(255,255,255,0.06); padding:0.25rem 0.6rem; border-radius:0.4rem; font-size:0.8rem;">${r.Turma}</span></td>
-          <td style="font-weight: 700; color: #a78bfa;">${r.Faltas_Aulas} Aulas</td>
-          <td class="num-faults-days">${r.Faltas_Dias} Dias</td>
-          <td style="font-weight:700; color:${r.Presenca_Pct < 75 ? 'var(--accent-rose)' : 'var(--accent-emerald)'};">${r.Presenca_Pct}%</td>
-          <td>
+          <td data-label="# Posição"><span class="rank-badge ${rankClass}">${pos}</span></td>
+          <td data-label="Nome do Aluno" style="font-weight: 600; color: #ffffff;">${r.Nome}</td>
+          <td data-label="Turma"><span style="background:rgba(255,255,255,0.06); padding:0.25rem 0.6rem; border-radius:0.4rem; font-size:0.8rem;">${r.Turma}</span></td>
+          <td data-label="Faltas (Aulas)" style="font-weight: 700; color: #a78bfa;">${r.Faltas_Aulas} Aulas</td>
+          <td data-label="Equivalente (Dias)" class="num-faults-days">${r.Faltas_Dias} Dias</td>
+          <td data-label="Presença (%)" style="font-weight:700; color:${r.Presenca_Pct < 75 ? 'var(--accent-rose)' : 'var(--accent-emerald)'};">${r.Presenca_Pct}%</td>
+          <td data-label="Progresso no Limite">
             <div style="font-size:0.78rem; font-weight:600; margin-bottom:0.2rem; color:var(--text-muted);">${pctLimite}% do limite (100 Aulas)</div>
             <div class="limit-progress-container">
               <div class="limit-progress-bar ${barClass}" style="width: ${pctLimite}%;"></div>
             </div>
           </td>
-          <td style="font-weight: 700; color: var(--accent-amber);">${r.Atrasos}</td>
-          <td>${situacaoBadge}</td>
+          <td data-label="Atrasos" style="font-weight: 700; color: var(--accent-amber);">${r.Atrasos}</td>
+          <td data-label="Situação">${situacaoBadge}</td>
         `;
         tbody.appendChild(tr);
       });
@@ -1271,7 +1312,7 @@
           ]
         },
         options: {
-          indexAxis: isMobile ? 'y' : 'x', // Barras horizontais no mobile para máxima leitura!
+          indexAxis: isMobile ? 'y' : 'x',
           responsive: true,
           maintainAspectRatio: false,
           plugins: {
