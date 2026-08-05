@@ -64,7 +64,7 @@
       gap: 1rem;
     }
 
-    /* TÍTULO EM BRANCO PURO (SEM GRADIENTE) */
+    /* TÍTULO EM BRANCO PURO */
     .header-title h1 {
       font-family: 'Outfit', sans-serif;
       font-size: 2.1rem;
@@ -376,26 +376,6 @@
       color: var(--accent-purple);
     }
 
-    .limit-progress-container {
-      width: 130px;
-      background: rgba(255, 255, 255, 0.08);
-      border-radius: 9999px;
-      height: 8px;
-      overflow: hidden;
-      margin-top: 0.3rem;
-    }
-
-    .limit-progress-bar {
-      height: 100%;
-      border-radius: 9999px;
-      transition: width 0.4s ease;
-    }
-
-    .bar-critico { background: var(--accent-rose); }
-    .bar-risco { background: var(--accent-amber); }
-    .bar-atencao { background: #eab308; }
-    .bar-normal { background: var(--accent-emerald); }
-
     footer {
       text-align: center;
       color: var(--text-muted);
@@ -406,7 +386,7 @@
     }
 
     /* ==========================================================================
-       MEDIA QUERIES - TABELA 100% RESPONSIVA EM CARDS NO MOBILE
+       MEDIA QUERIES - TABELA RESPONSIVA EM CARDS NO MOBILE
        ========================================================================== */
     
     @media (max-width: 1024px) {
@@ -512,7 +492,7 @@
         justify-content: center;
       }
 
-      /* TRANSFORMANDO A TABELA EM CARDS 100% RESPONSIVOS NO MOBILE */
+      /* MODO CARDS 100% RESPONSIVO NO MOBILE */
       .table-card thead {
         display: none;
       }
@@ -565,10 +545,6 @@
         letter-spacing: 0.04em;
         text-align: left;
         padding-right: 0.5rem;
-      }
-
-      .limit-progress-container {
-        width: 110px;
       }
     }
 
@@ -659,11 +635,11 @@
 
       <div class="kpi-card">
         <div class="kpi-header">
-          <span class="kpi-title">Limite Atingido</span>
-          <div class="kpi-icon icon-rose"><i class="fa-solid fa-shield-cat"></i></div>
+          <span class="kpi-title">Alunos em Atenção / Risco</span>
+          <div class="kpi-icon icon-rose"><i class="fa-solid fa-triangle-exclamation"></i></div>
         </div>
         <div class="kpi-value" id="kpi-alunos-criticos" style="color: var(--accent-emerald);">0 Alunos</div>
-        <div class="kpi-subtext">Com ≥ 100 aulas faltadas</div>
+        <div class="kpi-subtext">Com frequência abaixo de 75%</div>
       </div>
     </div>
 
@@ -691,10 +667,10 @@
     <!-- Table Section -->
     <div class="table-card">
       <div class="table-controls">
-        <div class="chart-title"><i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> Lista de Alunos e Limite de Ausências (100 Aulas / 10 Dias)</div>
+        <div class="chart-title"><i class="fa-solid fa-list-check" style="color: var(--accent-emerald);"></i> Lista de Alunos e Situação de Frequência</div>
         <div class="search-box">
           <i class="fa-solid fa-magnifying-glass"></i>
-          <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar aluno por nome...">
+          <input type="text" id="searchInput" class="search-input" placeholder="Pesquisar por iniciais do aluno...">
         </div>
         <button class="btn-export" id="btnExportCSV"><i class="fa-solid fa-file-csv"></i> Exportar CSV</button>
       </div>
@@ -709,7 +685,6 @@
               <th>Faltas (Aulas)</th>
               <th>Equivalente (Dias)</th>
               <th>Presença (%)</th>
-              <th>Progresso no Limite (100 Aulas / 10 Dias)</th>
               <th>Atrasos</th>
               <th>Situação</th>
             </tr>
@@ -730,7 +705,7 @@
   <script>
     let rawData = {
   "metadata": {
-    "atualizado_em": "05/08/2026 08:56:28",
+    "atualizado_em": "05/08/2026 10:26:27",
     "data_execucao": "05/08/2026",
     "total_registros": 30,
     "turmas_disponiveis": [
@@ -766,372 +741,342 @@
       "cor": "blue"
     },
     {
-      "titulo": "Alunos com Limite Atingido",
-      "valor": "0 Aluno(s)",
-      "subtexto": "Com 100 ou mais aulas faltadas",
-      "icone": "fa-shield-cat",
-      "cor": "emerald"
+      "titulo": "Alunos em Atenção / Risco",
+      "valor": "12 Aluno(s)",
+      "subtexto": "Com frequência abaixo de 75%",
+      "icone": "fa-triangle-exclamation",
+      "cor": "rose"
     }
   ],
   "registros": [
     {
-      "Nome": "GIULIA LUZ FARIA DA CRUZ",
+      "Nome": "G. L. F. D. C.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 30,
       "Faltas_Dias": 3.0,
       "Presenca_Pct": 0.0,
-      "Pct_Limite": 30.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Risco Crítico (< 50%)",
+      "Nivel": "critico"
     },
     {
-      "Nome": "ANA CAROLINE CARDOSO DA ROCHA",
+      "Nome": "A. C. C. D. R.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 20,
       "Faltas_Dias": 2.0,
       "Presenca_Pct": 33.3,
-      "Pct_Limite": 20.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Risco Crítico (< 50%)",
+      "Nivel": "critico"
     },
     {
-      "Nome": "PIETRA RIBEIRO TAVEIRA",
+      "Nome": "P. R. T.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 11,
       "Faltas_Dias": 1.1,
       "Presenca_Pct": 63.3,
-      "Pct_Limite": 11.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "MARIANA MOREIRA MOURA",
+      "Nome": "M. M. M.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 11,
       "Faltas_Dias": 1.1,
       "Presenca_Pct": 63.3,
-      "Pct_Limite": 11.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "THALITA OLIVEIRA DO PRADO",
+      "Nome": "T. O. D. P.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 11,
       "Faltas_Dias": 1.1,
       "Presenca_Pct": 63.3,
-      "Pct_Limite": 11.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "ANA CAROLINA MORAES FERREIRA",
+      "Nome": "A. C. M. F.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "GEOVANA GARCIA SEIXAS",
+      "Nome": "G. G. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "GUSTAVO SPOSITO",
+      "Nome": "G. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "VINICIUS ALVES ROCHA DOS SANTOS",
+      "Nome": "V. A. R. D. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "ANDRESSA SILVA SANTOS",
+      "Nome": "A. S. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "GRASIELLE SANTOS CAVALCANTE LIMA",
+      "Nome": "G. S. C. L.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "MARIA EDUARDA DOS SANTOS",
+      "Nome": "M. E. D. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
       "Presenca_Pct": 66.7,
-      "Pct_Limite": 10.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
-      "Nivel": "normal"
+      "Situacao": "Atenção (50-74%)",
+      "Nivel": "atencao"
     },
     {
-      "Nome": "SARAH BERTOLINO DOS SANTOS",
+      "Nome": "S. B. D. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 5,
       "Faltas_Dias": 0.5,
       "Presenca_Pct": 83.3,
-      "Pct_Limite": 5.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "JULIANA OLIVEIRA MACHADO",
+      "Nome": "J. O. M.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 3,
       "Faltas_Dias": 0.3,
       "Presenca_Pct": 90.0,
-      "Pct_Limite": 3.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "BIANCA TELES DA SILVA",
+      "Nome": "B. T. D. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 2,
       "Faltas_Dias": 0.2,
       "Presenca_Pct": 93.3,
-      "Pct_Limite": 2.0,
       "Atrasos": 3,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "THAYNA CORREIA DOS SANTOS",
+      "Nome": "T. C. D. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 2,
       "Faltas_Dias": 0.2,
       "Presenca_Pct": 93.3,
-      "Pct_Limite": 2.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "ERIC RODRIGUES MOTA CORRÊA",
+      "Nome": "E. R. M. C.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 3,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "LUCAS FRANÇA DA SILVA",
+      "Nome": "L. F. D. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "MARIA EDUARDA AMARAL SANTOS",
+      "Nome": "M. E. A. S.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 1,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "ANA JULIA PEREIRA ALBUQUERQUE",
+      "Nome": "A. J. P. A.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "DIOGO BAPTISTA DA SILVA DO CARMO",
+      "Nome": "D. B. D. S. D. C.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "GABRIEL NALIN DE JESUS",
+      "Nome": "G. N. D. J.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "GIOVANNA LIMA DE SOUZA",
+      "Nome": "G. L. D. S.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "LARA GOMEZ DE LIMA",
+      "Nome": "L. G. D. L.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "LETÍCIA LUZIA MELO VIDAL",
+      "Nome": "L. L. M. V.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "MANOELA PAULA DE OLIVEIRA BARROS",
+      "Nome": "M. P. D. O. B.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "MARIA EDUARDA MATOS NEVES",
+      "Nome": "M. E. M. N.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "QUEZIA OLIVEIRA DOS SANTOS",
+      "Nome": "Q. O. D. S.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "REBECA GONÇALVES LUIZ",
+      "Nome": "R. G. L.",
       "Turma": "1° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
     {
-      "Nome": "ARTHUR LUCENA ARAUJO",
+      "Nome": "A. L. A.",
       "Turma": "3° Semestre",
       "Google": "Sim",
       "Faltas_Aulas": 0,
       "Faltas_Dias": 0.0,
       "Presenca_Pct": 100.0,
-      "Pct_Limite": 0.0,
       "Atrasos": 0,
-      "Situacao": "Regular (< 40 Aulas)",
+      "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     }
   ]
@@ -1202,7 +1147,7 @@
         ? (registros.reduce((acc, r) => acc + (r.Presenca_Pct || 100), 0) / totalAlunos).toFixed(1)
         : "100.0";
 
-      const alunosCriticos = registros.filter(r => r.Faltas_Aulas >= 100).length;
+      const alunosCriticos = registros.filter(r => r.Presenca_Pct < 75.0).length;
 
       document.getElementById('kpi-total-alunos').textContent = totalAlunos;
       document.getElementById('kpi-aulas-dadas').textContent = `${aulasDecorridas} / ${totalAulasCurso} Aulas`;
@@ -1214,7 +1159,7 @@
       document.getElementById('kpi-media-frequencia').textContent = `${mediaFreq}%`;
       
       const elCritico = document.getElementById('kpi-alunos-criticos');
-      elCritico.textContent = `${alunosCriticos} Alunos`;
+      elCritico.textContent = `${alunosCriticos} Aluno(s)`;
       if (alunosCriticos > 0) {
         elCritico.style.color = "var(--accent-rose)";
       } else {
@@ -1232,7 +1177,7 @@
       tbody.innerHTML = '';
 
       if (registros.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="9" style="text-align:center; padding:2rem; color:var(--text-muted);">Nenhum aluno encontrado.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" style="text-align:center; padding:2rem; color:var(--text-muted);">Nenhum aluno encontrado.</td></tr>';
         return;
       }
 
@@ -1245,35 +1190,22 @@
         else if (pos === 2) rankClass = 'rank-2';
         else if (pos === 3) rankClass = 'rank-3';
 
-        const pctLimite = Math.min(100, Math.round((r.Faltas_Aulas / 100) * 100));
-
-        let barClass = 'bar-normal';
+        // SITUAÇÃO BASEADA EXCLUSIVAMENTE NA % DE PRESENÇA
         let situacaoBadge = '<span style="color:#10b981; font-weight:600;"><i class="fa-solid fa-circle-check"></i> Regular</span>';
 
-        if (r.Faltas_Aulas >= 100) {
-          barClass = 'bar-critico';
-          situacaoBadge = '<span style="color:#f43f5e; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Limite Atingido</span>';
-        } else if (r.Faltas_Aulas >= 70) {
-          barClass = 'bar-risco';
-          situacaoBadge = '<span style="color:#f59e0b; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Risco Alto</span>';
-        } else if (r.Faltas_Aulas >= 40) {
-          barClass = 'bar-atencao';
-          situacaoBadge = '<span style="color:#eab308; font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> Atenção</span>';
+        if (r.Presenca_Pct < 50.0) {
+          situacaoBadge = '<span style="color:#f43f5e; font-weight:700;"><i class="fa-solid fa-triangle-exclamation"></i> Risco Crítico</span>';
+        } else if (r.Presenca_Pct < 75.0) {
+          situacaoBadge = '<span style="color:#f59e0b; font-weight:600;"><i class="fa-solid fa-circle-exclamation"></i> Atenção</span>';
         }
 
         tr.innerHTML = `
           <td data-label="# Posição"><span class="rank-badge ${rankClass}">${pos}</span></td>
           <td data-label="Nome do Aluno" style="font-weight: 600; color: #ffffff;">${r.Nome}</td>
           <td data-label="Turma"><span style="background:rgba(255,255,255,0.06); padding:0.25rem 0.6rem; border-radius:0.4rem; font-size:0.8rem;">${r.Turma}</span></td>
-          <td data-label="Faltas (Aulas)" style="font-weight: 700; color: #a78bfa;">${r.Faltas_Aulas} Aulas</td>
-          <td data-label="Equivalente (Dias)" class="num-faults-days">${r.Faltas_Dias} Dias</td>
+          <td data-label="Faltas (Aulas)" style="font-weight: 700; color: #a78bfa;">${r.Faltas_Aulas}</td>
+          <td data-label="Equivalente (Dias)" class="num-faults-days">${r.Faltas_Dias}</td>
           <td data-label="Presença (%)" style="font-weight:700; color:${r.Presenca_Pct < 75 ? 'var(--accent-rose)' : 'var(--accent-emerald)'};">${r.Presenca_Pct}%</td>
-          <td data-label="Progresso no Limite">
-            <div style="font-size:0.78rem; font-weight:600; margin-bottom:0.2rem; color:var(--text-muted);">${pctLimite}% do limite (100 Aulas)</div>
-            <div class="limit-progress-container">
-              <div class="limit-progress-bar ${barClass}" style="width: ${pctLimite}%;"></div>
-            </div>
-          </td>
           <td data-label="Atrasos" style="font-weight: 700; color: var(--accent-amber);">${r.Atrasos}</td>
           <td data-label="Situação">${situacaoBadge}</td>
         `;
@@ -1284,7 +1216,7 @@
     function renderizarGraficos(registros, aulasDecorridas) {
       const isMobile = window.innerWidth <= 640;
       const top8 = registros.slice(0, isMobile ? 5 : 8);
-      const labels = top8.map(r => r.Nome.length > 16 ? r.Nome.substring(0, 16) + '...' : r.Nome);
+      const labels = top8.map(r => r.Nome);
       const aulas = top8.map(r => r.Faltas_Aulas);
       const dias = top8.map(r => r.Faltas_Dias);
 
@@ -1298,13 +1230,13 @@
           labels: labels,
           datasets: [
             {
-              label: 'Aulas Faltadas',
+              label: 'Faltas (Aulas)',
               data: aulas,
               backgroundColor: 'rgba(167, 139, 250, 0.85)',
               borderRadius: 6
             },
             {
-              label: 'Dias Ausentes',
+              label: 'Equivalente (Dias)',
               data: dias,
               backgroundColor: 'rgba(244, 63, 94, 0.85)',
               borderRadius: 6
