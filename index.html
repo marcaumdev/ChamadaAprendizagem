@@ -78,7 +78,6 @@
       gap: 1rem;
     }
 
-    /* TÍTULO NO TEMA CLARO (SEM ÍCONE 'G') */
     .header-title h1 {
       font-family: 'Outfit', sans-serif;
       font-size: 2.1rem;
@@ -136,7 +135,7 @@
       min-height: 44px;
     }
 
-    /* Rule Banner com Cores Google Light */
+    /* Rule Banner */
     .rule-banner {
       background: var(--google-blue-bg);
       border: 1px solid #aecbfa;
@@ -162,7 +161,7 @@
       color: var(--google-blue);
     }
 
-    /* KPI Grid - Tema Claro */
+    /* KPI Grid */
     .kpi-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -208,7 +207,6 @@
       flex-shrink: 0;
     }
 
-    /* Ícones no Tema Claro */
     .icon-google-blue { background: var(--google-blue-bg); color: var(--google-blue); }
     .icon-google-red { background: var(--google-red-bg); color: var(--google-red); }
     .icon-google-yellow { background: var(--google-yellow-bg); color: var(--google-yellow-text); }
@@ -382,7 +380,6 @@
       font-size: 0.8rem;
     }
 
-    /* Posições no Tema Claro */
     .rank-1 { background: var(--google-red-bg); color: var(--google-red); border: 1px solid #f5c6cb; }
     .rank-2 { background: var(--google-yellow-bg); color: var(--google-yellow-text); border: 1px solid #ffeeba; }
     .rank-3 { background: var(--google-blue-bg); color: var(--google-blue); border: 1px solid #b8daff; }
@@ -404,10 +401,7 @@
       border-top: 1px solid var(--card-border);
     }
 
-    /* ==========================================================================
-       MEDIA QUERIES - TABELA RESPONSIVA EM CARDS NO MOBILE (TEMA CLARO)
-       ========================================================================== */
-    
+    /* MEDIA QUERIES MOBILE */
     @media (max-width: 1024px) {
       .charts-grid {
         grid-template-columns: 1fr;
@@ -511,7 +505,6 @@
         justify-content: center;
       }
 
-      /* MODO CARDS 100% RESPONSIVO NO MOBILE (TEMA CLARO) */
       .table-card thead {
         display: none;
       }
@@ -606,7 +599,7 @@
           <option value="3° Semestre">🏫 3° Semestre</option>
         </select>
         <span class="badge-status">
-          <i class="fa-solid fa-calendar-day"></i> <span id="badge-aulas-dadas">30 / 400 Aulas Dadas</span>
+          <i class="fa-solid fa-calendar-day"></i> <span id="badge-aulas-dadas">30 de 400 Aulas Dadas</span>
         </span>
       </div>
     </header>
@@ -623,7 +616,7 @@
       </div>
     </div>
 
-    <!-- KPI Cards Grid (Tema Claro Google) -->
+    <!-- KPI Cards Grid -->
     <div class="kpi-grid">
       <div class="kpi-card">
         <div class="kpi-header">
@@ -639,7 +632,7 @@
           <span class="kpi-title">Aulas Ministradas</span>
           <div class="kpi-icon icon-google-yellow"><i class="fa-solid fa-graduation-cap"></i></div>
         </div>
-        <div class="kpi-value" id="kpi-aulas-dadas" style="color: var(--google-yellow-text);">30 / 400 Aulas</div>
+        <div class="kpi-value" id="kpi-aulas-dadas" style="color: var(--google-yellow-text);">30 de 400 Aulas</div>
         <div class="kpi-subtext" id="kpi-dias-dados">3 Dias de aula ministrados</div>
       </div>
 
@@ -666,7 +659,7 @@
     <div class="charts-grid">
       <div class="chart-card">
         <div class="chart-header">
-          <span class="chart-title"><i class="fa-solid fa-chart-column" style="color: var(--google-blue);"></i> Alunos com Ausências Registradas (Aulas & Dias)</span>
+          <span class="chart-title"><i class="fa-solid fa-chart-column" style="color: var(--google-blue);"></i> Alunos com Ausências Registradas (Dias)</span>
         </div>
         <div class="canvas-container">
           <canvas id="chartRanking"></canvas>
@@ -724,8 +717,8 @@
   <script>
     let rawData = {
   "metadata": {
-    "atualizado_em": "05/08/2026 11:18:05",
-    "data_execucao": "05/08/2026",
+    "atualizado_em": "06/08/2026 08:21:16",
+    "data_execucao": "06/08/2026",
     "total_registros": 30,
     "turmas_disponiveis": [
       "1° Semestre",
@@ -746,8 +739,8 @@
       "cor": "emerald"
     },
     {
-      "titulo": "Progresso de Aulas Ministradas",
-      "valor": "30 / 400 Aulas",
+      "titulo": "Aulas Ministradas",
+      "valor": "30 de 400 Aulas",
       "subtexto": "3 de 40 Dias de aula ocorridos até hoje",
       "icone": "fa-calendar-check",
       "cor": "purple"
@@ -1169,9 +1162,9 @@
       const alunosCriticos = registros.filter(r => r.Presenca_Pct < 75.0).length;
 
       document.getElementById('kpi-total-alunos').textContent = totalAlunos;
-      document.getElementById('kpi-aulas-dadas').textContent = `${aulasDecorridas} / ${totalAulasCurso} Aulas`;
+      document.getElementById('kpi-aulas-dadas').textContent = `${aulasDecorridas} de ${totalAulasCurso} Aulas`;
       document.getElementById('kpi-dias-dados').textContent = `${diasDecorridos} Dias de aula ministrados`;
-      document.getElementById('badge-aulas-dadas').textContent = `${aulasDecorridas} / ${totalAulasCurso} Aulas Dadas`;
+      document.getElementById('badge-aulas-dadas').textContent = `${aulasDecorridas} de ${totalAulasCurso} Aulas Dadas`;
       document.getElementById('banner-dias-decorridos').textContent = `${diasDecorridos} de 40 Dias de aula`;
       document.getElementById('banner-aulas-decorridas').textContent = `${aulasDecorridas} Aulas dadas`;
       
@@ -1209,7 +1202,6 @@
         else if (pos === 2) rankClass = 'rank-2';
         else if (pos === 3) rankClass = 'rank-3';
 
-        // SITUAÇÃO NO TEMA CLARO GOOGLE
         let situacaoBadge = '<span style="color:var(--google-green); font-weight:600;"><i class="fa-solid fa-circle-check"></i> Regular</span>';
 
         if (r.Presenca_Pct < 50.0) {
@@ -1236,12 +1228,12 @@
       const isMobile = window.innerWidth <= 640;
       const top8 = registros.slice(0, isMobile ? 5 : 8);
       const labels = top8.map(r => r.Nome);
-      const aulas = top8.map(r => r.Faltas_Aulas);
       const dias = top8.map(r => r.Faltas_Dias);
 
       if (chartRankingInstance) chartRankingInstance.destroy();
       if (chartDoughnutInstance) chartDoughnutInstance.destroy();
 
+      // GRÁFICO SOMENTE COM DIAS AUSENTES
       const ctxRanking = document.getElementById('chartRanking').getContext('2d');
       chartRankingInstance = new Chart(ctxRanking, {
         type: 'bar',
@@ -1249,15 +1241,9 @@
           labels: labels,
           datasets: [
             {
-              label: 'Faltas (Aulas)',
-              data: aulas,
-              backgroundColor: '#1a73e8', // Google Blue Light Theme
-              borderRadius: 6
-            },
-            {
-              label: 'Equivalente (Dias)',
+              label: 'Dias Ausentes',
               data: dias,
-              backgroundColor: '#d93025', // Google Red Light Theme
+              backgroundColor: '#1a73e8', // Google Blue
               borderRadius: 6
             }
           ]
@@ -1286,7 +1272,7 @@
           labels: ['Aulas Assistidas', 'Aulas Faltadas'],
           datasets: [{
             data: [totalPresencas, totalAulasFaltas],
-            backgroundColor: ['#188038', '#d93025'], // Google Green & Red Light
+            backgroundColor: ['#188038', '#d93025'],
             borderWidth: 0
           }]
         },
