@@ -1,17 +1,17 @@
 {
   "metadata": {
-    "atualizado_em": "14/09/2026 17:05:18",
-    "data_execucao": "14/09/2026",
+    "atualizado_em": "18/09/2026 17:05:20",
+    "data_execucao": "18/09/2026",
     "total_registros": 29,
     "turmas_disponiveis": [
       "1° Semestre",
       "3° Semestre"
     ],
-    "dias_decorridos": 14,
-    "aulas_decorridas": 140,
+    "dias_decorridos": 15,
+    "aulas_decorridas": 150,
     "total_dias_curso": 40,
     "total_aulas_curso": 400,
-    "proxima_aula": "18/09/2026"
+    "proxima_aula": "21/09/2026"
   },
   "kpis": [
     {
@@ -23,21 +23,21 @@
     },
     {
       "titulo": "Aulas Ministradas",
-      "valor": "140 de 400 Aulas",
-      "subtexto": "14 de 40 Dias de aula ocorridos até hoje",
+      "valor": "150 de 400 Aulas",
+      "subtexto": "15 de 40 Dias de aula ocorridos até hoje",
       "icone": "fa-calendar-check",
       "cor": "purple"
     },
     {
       "titulo": "Frequência Média Geral",
-      "valor": "85.2%",
+      "valor": "85.1%",
       "subtexto": "Presença média dos alunos Google",
       "icone": "fa-chart-line",
       "cor": "blue"
     },
     {
       "titulo": "Alunos em Atenção / Risco",
-      "valor": "6 Aluno(s)",
+      "valor": "5 Aluno(s)",
       "subtexto": "Com frequência abaixo de 75%",
       "icone": "fa-triangle-exclamation",
       "cor": "rose"
@@ -48,9 +48,9 @@
       "Nome": "AN* CAR***** CAR**** DA RO***",
       "Turma": "3° Semestre",
       "Google": "Sim",
-      "Faltas_Aulas": 101,
-      "Faltas_Dias": 10.1,
-      "Presenca_Pct": 27.9,
+      "Faltas_Aulas": 111,
+      "Faltas_Dias": 11.1,
+      "Presenca_Pct": 26.0,
       "Atrasos": 3,
       "Situacao": "Risco Crítico (< 50%)",
       "Nivel": "critico"
@@ -61,8 +61,8 @@
       "Google": "Sim",
       "Faltas_Aulas": 50,
       "Faltas_Dias": 5.0,
-      "Presenca_Pct": 64.3,
-      "Atrasos": 0,
+      "Presenca_Pct": 66.7,
+      "Atrasos": 1,
       "Situacao": "Atenção (50-74%)",
       "Nivel": "atencao"
     },
@@ -72,8 +72,8 @@
       "Google": "Sim",
       "Faltas_Aulas": 45,
       "Faltas_Dias": 4.5,
-      "Presenca_Pct": 67.9,
-      "Atrasos": 5,
+      "Presenca_Pct": 70.0,
+      "Atrasos": 6,
       "Situacao": "Atenção (50-74%)",
       "Nivel": "atencao"
     },
@@ -81,21 +81,21 @@
       "Nome": "GEO**** GAR*** SEI***",
       "Turma": "3° Semestre",
       "Google": "Sim",
-      "Faltas_Aulas": 41,
-      "Faltas_Dias": 4.1,
-      "Presenca_Pct": 70.7,
-      "Atrasos": 5,
+      "Faltas_Aulas": 42,
+      "Faltas_Dias": 4.2,
+      "Presenca_Pct": 72.0,
+      "Atrasos": 6,
       "Situacao": "Atenção (50-74%)",
       "Nivel": "atencao"
     },
     {
-      "Nome": "JUL**** OLI***** MAC****",
+      "Nome": "PIE*** RIB**** TAV****",
       "Turma": "3° Semestre",
       "Google": "Sim",
-      "Faltas_Aulas": 36,
-      "Faltas_Dias": 3.6,
-      "Presenca_Pct": 74.3,
-      "Atrasos": 4,
+      "Faltas_Aulas": 40,
+      "Faltas_Dias": 4.0,
+      "Presenca_Pct": 73.3,
+      "Atrasos": 2,
       "Situacao": "Atenção (50-74%)",
       "Nivel": "atencao"
     },
@@ -103,12 +103,23 @@
       "Nome": "MAR**** MOR**** MO***",
       "Turma": "3° Semestre",
       "Google": "Sim",
+      "Faltas_Aulas": 37,
+      "Faltas_Dias": 3.7,
+      "Presenca_Pct": 75.3,
+      "Atrasos": 2,
+      "Situacao": "Regular (≥ 75%)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "JUL**** OLI***** MAC****",
+      "Turma": "3° Semestre",
+      "Google": "Sim",
       "Faltas_Aulas": 36,
       "Faltas_Dias": 3.6,
-      "Presenca_Pct": 74.3,
-      "Atrasos": 1,
-      "Situacao": "Atenção (50-74%)",
-      "Nivel": "atencao"
+      "Presenca_Pct": 76.0,
+      "Atrasos": 5,
+      "Situacao": "Regular (≥ 75%)",
+      "Nivel": "normal"
     },
     {
       "Nome": "AN* JU*** PER**** ALB********",
@@ -116,19 +127,8 @@
       "Google": "Sim",
       "Faltas_Aulas": 35,
       "Faltas_Dias": 3.5,
-      "Presenca_Pct": 75.0,
+      "Presenca_Pct": 76.7,
       "Atrasos": 0,
-      "Situacao": "Regular (≥ 75%)",
-      "Nivel": "normal"
-    },
-    {
-      "Nome": "PIE*** RIB**** TAV****",
-      "Turma": "3° Semestre",
-      "Google": "Sim",
-      "Faltas_Aulas": 30,
-      "Faltas_Dias": 3.0,
-      "Presenca_Pct": 78.6,
-      "Atrasos": 2,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
@@ -136,8 +136,8 @@
       "Nome": "GUS**** SPO****",
       "Turma": "3° Semestre",
       "Google": "Sim",
-      "Faltas_Aulas": 28,
-      "Faltas_Dias": 2.8,
+      "Faltas_Aulas": 30,
+      "Faltas_Dias": 3.0,
       "Presenca_Pct": 80.0,
       "Atrasos": 6,
       "Situacao": "Regular (≥ 75%)",
@@ -149,7 +149,7 @@
       "Google": "Sim",
       "Faltas_Aulas": 28,
       "Faltas_Dias": 2.8,
-      "Presenca_Pct": 80.0,
+      "Presenca_Pct": 81.3,
       "Atrasos": 4,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
@@ -160,7 +160,7 @@
       "Google": "Sim",
       "Faltas_Aulas": 25,
       "Faltas_Dias": 2.5,
-      "Presenca_Pct": 82.1,
+      "Presenca_Pct": 83.3,
       "Atrasos": 4,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
@@ -171,8 +171,41 @@
       "Google": "Sim",
       "Faltas_Aulas": 24,
       "Faltas_Dias": 2.4,
-      "Presenca_Pct": 82.9,
+      "Presenca_Pct": 84.0,
+      "Atrasos": 2,
+      "Situacao": "Regular (≥ 75%)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "MA*** EDU**** DO* SAN***",
+      "Turma": "3° Semestre",
+      "Google": "Sim",
+      "Faltas_Aulas": 24,
+      "Faltas_Dias": 2.4,
+      "Presenca_Pct": 84.0,
       "Atrasos": 1,
+      "Situacao": "Regular (≥ 75%)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "LU*** FRA*** DA SI***",
+      "Turma": "3° Semestre",
+      "Google": "Sim",
+      "Faltas_Aulas": 22,
+      "Faltas_Dias": 2.2,
+      "Presenca_Pct": 85.3,
+      "Atrasos": 8,
+      "Situacao": "Regular (≥ 75%)",
+      "Nivel": "normal"
+    },
+    {
+      "Nome": "SA*** BER****** DO* SAN***",
+      "Turma": "3° Semestre",
+      "Google": "Sim",
+      "Faltas_Aulas": 18,
+      "Faltas_Dias": 1.8,
+      "Presenca_Pct": 88.0,
+      "Atrasos": 8,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
@@ -182,30 +215,8 @@
       "Google": "Sim",
       "Faltas_Aulas": 17,
       "Faltas_Dias": 1.7,
-      "Presenca_Pct": 87.9,
-      "Atrasos": 9,
-      "Situacao": "Regular (≥ 75%)",
-      "Nivel": "normal"
-    },
-    {
-      "Nome": "SA*** BER****** DO* SAN***",
-      "Turma": "3° Semestre",
-      "Google": "Sim",
-      "Faltas_Aulas": 16,
-      "Faltas_Dias": 1.6,
-      "Presenca_Pct": 88.6,
-      "Atrasos": 7,
-      "Situacao": "Regular (≥ 75%)",
-      "Nivel": "normal"
-    },
-    {
-      "Nome": "MA*** EDU**** DO* SAN***",
-      "Turma": "3° Semestre",
-      "Google": "Sim",
-      "Faltas_Aulas": 14,
-      "Faltas_Dias": 1.4,
-      "Presenca_Pct": 90.0,
-      "Atrasos": 1,
+      "Presenca_Pct": 88.7,
+      "Atrasos": 10,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
@@ -215,19 +226,8 @@
       "Google": "Sim",
       "Faltas_Aulas": 13,
       "Faltas_Dias": 1.3,
-      "Presenca_Pct": 90.7,
-      "Atrasos": 9,
-      "Situacao": "Regular (≥ 75%)",
-      "Nivel": "normal"
-    },
-    {
-      "Nome": "LU*** FRA*** DA SI***",
-      "Turma": "3° Semestre",
-      "Google": "Sim",
-      "Faltas_Aulas": 12,
-      "Faltas_Dias": 1.2,
-      "Presenca_Pct": 91.4,
-      "Atrasos": 8,
+      "Presenca_Pct": 91.3,
+      "Atrasos": 10,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
@@ -237,7 +237,7 @@
       "Google": "Sim",
       "Faltas_Aulas": 12,
       "Faltas_Dias": 1.2,
-      "Presenca_Pct": 91.4,
+      "Presenca_Pct": 92.0,
       "Atrasos": 2,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
@@ -248,7 +248,7 @@
       "Google": "Sim",
       "Faltas_Aulas": 12,
       "Faltas_Dias": 1.2,
-      "Presenca_Pct": 91.4,
+      "Presenca_Pct": 92.0,
       "Atrasos": 2,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
@@ -259,8 +259,8 @@
       "Google": "Sim",
       "Faltas_Aulas": 11,
       "Faltas_Dias": 1.1,
-      "Presenca_Pct": 92.1,
-      "Atrasos": 3,
+      "Presenca_Pct": 92.7,
+      "Atrasos": 4,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
     },
@@ -270,7 +270,7 @@
       "Google": "Sim",
       "Faltas_Aulas": 10,
       "Faltas_Dias": 1.0,
-      "Presenca_Pct": 92.9,
+      "Presenca_Pct": 93.3,
       "Atrasos": 3,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
@@ -281,7 +281,7 @@
       "Google": "Sim",
       "Faltas_Aulas": 4,
       "Faltas_Dias": 0.4,
-      "Presenca_Pct": 97.1,
+      "Presenca_Pct": 97.3,
       "Atrasos": 1,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
@@ -290,9 +290,9 @@
       "Nome": "MA*** EDU**** MA*** NE***",
       "Turma": "1° Semestre",
       "Google": "Sim",
-      "Faltas_Aulas": 2,
-      "Faltas_Dias": 0.2,
-      "Presenca_Pct": 98.6,
+      "Faltas_Aulas": 3,
+      "Faltas_Dias": 0.3,
+      "Presenca_Pct": 98.0,
       "Atrasos": 0,
       "Situacao": "Regular (≥ 75%)",
       "Nivel": "normal"
